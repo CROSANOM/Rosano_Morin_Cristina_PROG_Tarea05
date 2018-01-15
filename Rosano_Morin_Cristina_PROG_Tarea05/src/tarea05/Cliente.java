@@ -7,6 +7,8 @@ package tarea05;
  * @author crosanom
  *
  */
+
+
 public class Cliente {
 
 	private String nombre, dni,direccion, localidad, codigoPostal;
