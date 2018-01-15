@@ -8,16 +8,24 @@ package tarea05;
  *
  */
 
-
 public class Cliente {
 
-	private String nombre, dni,direccion, localidad, codigoPostal;
-	int identificador, numClientes;
+	private String nombre, dni, direccion, localidad, codigoPostal;
+	private int identificador, numClientes;
 
 	// crear el constructor clase Cliente con parametros
 
-	
-	public Cliente(String nombre, String direccion, String localidad, String codigoPostal, int numClientes) {
+	/**
+	 * @param nombre
+	 * @param dni
+	 * @param direccion
+	 * @param localidad
+	 * @param codigoPostal
+	 * @param identificador
+	 * @param numClientes
+	 */
+	public Cliente(String nombre, String dni, String direccion, String localidad, String codigoPostal,
+			int identificador, int numClientes) {
 
 	}
 
