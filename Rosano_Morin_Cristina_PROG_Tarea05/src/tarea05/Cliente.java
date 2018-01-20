@@ -11,5 +11,4 @@ public class Cliente {
 	private int identificador;
 	private static int numClientes;
 
-	
 }
