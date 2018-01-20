@@ -12,7 +12,7 @@ package tarea05;
 public class ExcepcionAlquilerVehiculos extends RuntimeException {
 
 	// crear un atributo long
-	private static final long serialVersionUID = 000000000000001;
+	private static final long serialVersionUID = 010;
 	private String mensaje = "";
 
 	// constructor de excepcion que llama a la clase padre con super
@@ -21,3 +21,9 @@ public class ExcepcionAlquilerVehiculos extends RuntimeException {
 	}
 	
 }
+
+
+
+
+
+
