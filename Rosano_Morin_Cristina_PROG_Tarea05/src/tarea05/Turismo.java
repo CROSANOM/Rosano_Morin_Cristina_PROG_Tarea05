@@ -20,8 +20,6 @@ public class Turismo {
 	 * @param modelo
 	 * @param cilindrada
 	 */
-	
-	//constructor con 4 atributos pasados como parametro
 	public Turismo(String matricula,String marca,String modelo,int cilindrada) {
 		
 	}
