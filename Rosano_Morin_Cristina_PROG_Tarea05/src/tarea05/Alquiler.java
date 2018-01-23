@@ -101,6 +101,21 @@ public class Alquiler {
 		return precioTotal;
 	}
 
-	
-	
+	// Punto18 Crear un método llamado toString y que devuelva un String que será la
+	// representación del alquiler
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Alquiler [fecha=" + fecha + ", dias=" + dias + ", MS_DIA=" + MS_DIA + ", FORMATO_FECHA=" + FORMATO_FECHA
+				+ ", PRECIO_DIA=" + PRECIO_DIA + ", cliente=" + cliente + ", turismo=" + turismo + ", diferenciaDias="
+				+ diferenciaDias + ", getFecha()=" + getFecha() + ", getDias()=" + getDias() + ", getMS_DIA()="
+				+ getMS_DIA() + ", getFORMATO_FECHA()=" + getFORMATO_FECHA() + ", getPRECIO_DIA()=" + getPRECIO_DIA()
+				+ "]";
+	}
+
 }
