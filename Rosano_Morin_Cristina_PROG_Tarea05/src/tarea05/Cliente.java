@@ -15,6 +15,7 @@ public class Cliente {
 	public Cliente(String nombre, String dni, String direccion, String localidad, String codigoPostal) {
 		this.nombre = nombre;
 		this.dni = dni;
+		// hay que meter la condición con metodo compruebaDNi + excepción 
 		this.direccion = direccion;
 		this.localidad = localidad;
 		this.codigoPostal = codigoPostal;
@@ -23,10 +24,20 @@ public class Cliente {
 
 		numClientes++;
 		identificador = numClientes;
-
 	}
 
-	// Crear constructor copia de Cliente
+	// Punto 6 Crear constructor copia de Cliente
+
+	public Cliente(Cliente cliente) {
+
+		identificador = cliente.getIdentificador();
+		nombre = cliente.getNombre();
+		dni = cliente.getDni();
+		direccion = cliente.getDireccion();
+		localidad = cliente.getLocalidad();
+		codigoPostal = cliente.getCodigoPostal();
+
+	}
 
 	// crear metodos comprueba
 
