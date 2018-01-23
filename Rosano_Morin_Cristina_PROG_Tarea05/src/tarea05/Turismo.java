@@ -34,7 +34,6 @@ public class Turismo {
 
 	/* metodo privado comprueba matricula */
 	private boolean compruebaMatricula(String matricula) {
-
 		Pattern matriculaPatron = Pattern.compile(" \"^([0-9]{4})([A-Z&&[^AEIOIU]]{3}$)\"");
 		Matcher emparejador = matriculaPatron.matcher((matricula));
 		if (emparejador.matches()) {
@@ -83,6 +82,20 @@ public class Turismo {
 	 */
 	public boolean isDisponibilidad() {
 		return disponibilidad;
+	}
+
+	// punto11 Crear un método llamado toString que devolverá un String y será la
+	// representación del turismo.
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Turismo [matricula=" + matricula + ", marca=" + marca + ", modelo=" + modelo + ", cilindrada="
+				+ cilindrada + ", disponibilidad=" + disponibilidad + "]";
 	}
 
 }
