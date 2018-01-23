@@ -9,7 +9,7 @@ public class Cliente {
 
 	private String nombre, dni, direccion, localidad, codigoPostal;
 	private int identificador;
-	private static int numClientes;
+	private static int numClientes = 0;
 
 	// punto 6 ( crear un constructor Cliente con cinco parámetros)
 	public Cliente(String nombre, String dni, String direccion, String localidad, String codigoPostal) {
@@ -19,7 +19,14 @@ public class Cliente {
 		this.localidad = localidad;
 		this.codigoPostal = codigoPostal;
 
+		// por cada cliente que creo se asigna un identificador
+
+		numClientes++;
+		identificador = numClientes;
+
 	}
+
+	// Crear constructor copia de Cliente
 
 	// crear metodos comprueba
 
@@ -52,6 +59,70 @@ public class Cliente {
 
 		return emparejador.matches();
 
+	}
+
+	// Punto 7 Crear los métodos get para cada uno de los atributos.
+
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+	/**
+	 * @return the dni
+	 */
+	public String getDni() {
+		return dni;
+	}
+
+	/**
+	 * @return the direccion
+	 */
+	public String getDireccion() {
+		return direccion;
+	}
+
+	/**
+	 * @return the localidad
+	 */
+	public String getLocalidad() {
+		return localidad;
+	}
+
+	/**
+	 * @return the codigoPostal
+	 */
+	public String getCodigoPostal() {
+		return codigoPostal;
+	}
+
+	/**
+	 * @return the identificador
+	 */
+	public int getIdentificador() {
+		return identificador;
+	}
+
+	/**
+	 * @return the numClientes
+	 */
+	public static int getNumClientes() {
+		return numClientes;
+	}
+	// punto 8 Crear el método toString que devuelva una representación de nuestro
+	// cliente
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Cliente [nombre=" + nombre + ", dni=" + dni + ", direccion=" + direccion + ", localidad=" + localidad
+				+ ", codigoPostal=" + codigoPostal + ", identificador=" + identificador + "]";
 	}
 
 }
