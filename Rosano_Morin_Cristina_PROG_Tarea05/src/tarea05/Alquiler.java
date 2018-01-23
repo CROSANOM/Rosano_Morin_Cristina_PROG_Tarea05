@@ -32,7 +32,6 @@ public Alquiler (Cliente cliente, Turismo turismo) {
 	
 }
 	
-
 // punto 15  metodos get and set 
 
 	public Date getFecha() {
