@@ -3,6 +3,8 @@ package tarea05;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.FormAction;
+
 /**
  * @author crosanom
  *
@@ -17,19 +19,23 @@ public class Alquiler {
 	private final SimpleDateFormat FORMATO_FECHA = new SimpleDateFormat("dd/MM/yyyy");// incialiazación del objeto
 	private final double PRECIO_DIA = 0;
 
+	// declarar atributo Cliente cliente Turismo turismo para la clase Alquiler
+	private Cliente cliente;
+	private Turismo turismo;
+
 	// punto14 crear un constructor clase Alquiler con Cliente Turismo como
 	// parametros
 
 	public Alquiler(Cliente cliente, Turismo turismo) {
 		// como inicializar los atributos de otra clase ;
+		this.cliente = cliente;
+		this.turismo = turismo;
 
-		cliente = cliente;
-		turismo = turismo;
 		// turismo.setDisponibilidad(false);
 
 	}
 
-	// punto15 crear los métodos get para los atributos.
+	// punto15 crear los métodos get para los atributos de la clase Alquiler
 	/**
 	 * @return the fecha
 	 */
@@ -65,4 +71,36 @@ public class Alquiler {
 		return PRECIO_DIA;
 	}
 
+	/*
+	 * punto16 Crea un método close que cerrará el alquiler, para lo que partiendo
+	 * de la fecha actual y la fecha en que se realizó el alquiler, calcule el
+	 * número de días -si se devuelve el mismo día contará como 1 día- y ponga el
+	 * turismo como disponible. Para ello crea un método privado llamado difDias y
+	 * que devuelva la diferencia en días entre dos fechas y luego utilizalo en el
+	 * método close
+	 */
+
+	// metodoDifDias
+
+	int diferenciaDias = 0; // declára de manera global para que no chille y se pueda usar en
+							// metodoGetPrecio
+
+	private int diferenciaDias(SimpleDateFormat FORMATO_FECHAsalida, SimpleDateFormat FORMATO_FECHA_entrada) {
+
+		return diferenciaDias;
+	}
+
+	// Metodo calcule el precio total ( 30 euros * Ndias + cilindra/100 )
+
+	public double getPrecio(double PRECIO_DIA, int dias, Turismo cilindrada) { // parametros del getPrecio
+
+		// instanciar una cilindrada
+
+		double precioTotal = ((PRECIO_DIA * diferenciaDias) + turismo.getCilindrada() / 100);
+
+		return precioTotal;
+	}
+
+	
+	
 }
