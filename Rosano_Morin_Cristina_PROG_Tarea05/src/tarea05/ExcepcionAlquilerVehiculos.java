@@ -11,19 +11,13 @@ package tarea05;
 // crear una clase que hereda de la clase Excepción
 public class ExcepcionAlquilerVehiculos extends RuntimeException {
 
-	// crear un atributo long
-	private static final long serialVersionUID = 010;
+	// crean los atributos
+	private static final long serialVersionUID010 = 1;
 	private String mensaje = "";
 
 	// constructor de excepcion que llama a la clase padre con super
 	public ExcepcionAlquilerVehiculos(String message) {
-		super(message);	
+		super(message);
 	}
-	
+
 }
-
-
-
-
-
-
