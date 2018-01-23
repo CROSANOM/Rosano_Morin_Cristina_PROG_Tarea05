@@ -3,8 +3,7 @@ package tarea05;
  * 
  */
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 /**
  * @author crosanom version1
