@@ -1,11 +1,6 @@
 package tarea05;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-/**
- * 
- */
+import java.util.regex.*;
 
 /**
  * @author crosanom version1
@@ -51,6 +46,43 @@ public class Turismo {
 		}
 		return emparejador.matches();
 
+		// punto 11 metodos getter de los atributos
+
+	}
+
+	/**
+	 * @return the matricula
+	 */
+	public String getMatricula() {
+		return matricula;
+	}
+
+	/**
+	 * @return the marca
+	 */
+	public String getMarca() {
+		return marca;
+	}
+
+	/**
+	 * @return the modelo
+	 */
+	public String getModelo() {
+		return modelo;
+	}
+
+	/**
+	 * @return the cilindrada
+	 */
+	public int getCilindrada() {
+		return cilindrada;
+	}
+
+	/**
+	 * @return the disponibilidad
+	 */
+	public boolean isDisponibilidad() {
+		return disponibilidad;
 	}
 
 }
