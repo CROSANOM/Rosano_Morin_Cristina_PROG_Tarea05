@@ -3,7 +3,7 @@ package tarea05;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//Punto5  crear la clase cliente con los atributos y visibilidad adecuados 
+//Punto5  crear la clase cliente con los atributos y visibilidad adecuados. 
 
 public class Cliente {
 
@@ -13,32 +13,32 @@ public class Cliente {
 
 	// punto 6 ( crear un constructor Cliente con cinco parámetros)
 	public Cliente(String nombre, String dni, String direccion, String localidad, String codigoPostal) {
-			
-			boolean dniCorrecto = false;
-			boolean codigoCorrecto = false;
-			
-			this.nombre = nombre;			
-			this.direccion = direccion;
-			this.localidad = localidad;
-			
-			dniCorrecto = compruebaDni(dni);
-			codigoCorrecto = compruebaCodigoPostal(codigoPostal);
-			// Comprobar dni o lanzar excepcion.
-			if (dniCorrecto) {
-				this.dni = dni;
-			} else 
-				throw new ExcepcionAlquilerVehiculos("El dni no es correcto.");			
-			// Comprobar codigo postal o lanzar excepción.
-			if (codigoCorrecto) {
-				this.codigoPostal = codigoPostal;
-				
-			} else 
-				throw new ExcepcionAlquilerVehiculos("El codigo postal no es correcto.");
-		
-			if (this.dni!=null && this.codigoPostal!=null) {
-				// Contar nuevo cliente.
-				this.identificador = numClientes++;		
-			}
+
+		boolean dniCorrecto = false;
+		boolean codigoCorrecto = false;
+
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.localidad = localidad;
+
+		dniCorrecto = compruebaDni(dni);
+		codigoCorrecto = compruebaCodigoPostal(codigoPostal);
+		// Comprobar dni o lanzar excepcion.
+		if (dniCorrecto) {
+			this.dni = dni;
+		} else
+			throw new ExcepcionAlquilerVehiculos("El dni no es correcto.");
+		// Comprobar codigo postal o lanzar excepción.
+		if (codigoCorrecto) {
+			this.codigoPostal = codigoPostal;
+
+		} else
+			throw new ExcepcionAlquilerVehiculos("El codigo postal no es correcto.");
+
+		if (this.dni != null && this.codigoPostal != null) {
+			// Contar nuevo cliente.
+			this.identificador = numClientes++;
+		}
 	}
 
 	// Punto 6 Crear constructor copia de Cliente
@@ -80,7 +80,7 @@ public class Cliente {
 		if (emparejador.matches()) {
 			System.out.println(" El codigo Postal es Correcto");
 		} else {
-			System.out.println("El codigo Postal es Correcto");
+			System.out.println("El codigo Postal NO es Correcto");
 		}
 
 		return emparejador.matches();
@@ -138,7 +138,7 @@ public class Cliente {
 		return numClientes;
 	}
 	// punto 8 Crear el método toString que devuelva una representación de nuestro
-	// cliente
+	// cliente.
 
 	/*
 	 * (non-Javadoc)
