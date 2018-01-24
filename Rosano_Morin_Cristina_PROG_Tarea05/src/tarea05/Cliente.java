@@ -3,7 +3,7 @@ package tarea05;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// crear la clase cliente con los atributos y visibilidad adecuados 
+//Punto5  crear la clase cliente con los atributos y visibilidad adecuados 
 
 public class Cliente {
 
@@ -13,17 +13,32 @@ public class Cliente {
 
 	// punto 6 ( crear un constructor Cliente con cinco parámetros)
 	public Cliente(String nombre, String dni, String direccion, String localidad, String codigoPostal) {
-		this.nombre = nombre;
-		this.dni = dni;
-		// hay que meter la condición con metodo compruebaDNi + excepción 
-		this.direccion = direccion;
-		this.localidad = localidad;
-		this.codigoPostal = codigoPostal;
-
-		// por cada cliente que creo se asigna un identificador
-
-		numClientes++;
-		identificador = numClientes;
+			
+			boolean dniCorrecto = false;
+			boolean codigoCorrecto = false;
+			
+			this.nombre = nombre;			
+			this.direccion = direccion;
+			this.localidad = localidad;
+			
+			dniCorrecto = compruebaDni(dni);
+			codigoCorrecto = compruebaCodigoPostal(codigoPostal);
+			// Comprobar dni o lanzar excepcion.
+			if (dniCorrecto) {
+				this.dni = dni;
+			} else 
+				throw new ExcepcionAlquilerVehiculos("El dni no es correcto.");			
+			// Comprobar codigo postal o lanzar excepción.
+			if (codigoCorrecto) {
+				this.codigoPostal = codigoPostal;
+				
+			} else 
+				throw new ExcepcionAlquilerVehiculos("El codigo postal no es correcto.");
+		
+			if (this.dni!=null && this.codigoPostal!=null) {
+				// Contar nuevo cliente.
+				this.identificador = numClientes++;		
+			}
 	}
 
 	// Punto 6 Crear constructor copia de Cliente
@@ -42,7 +57,7 @@ public class Cliente {
 	// crear metodos comprueba
 
 	/* metodo privado comprueba dni */
-	private boolean compruebaDni(String dni) {
+	private static boolean compruebaDni(String dni) {
 
 		Pattern dniPatron = Pattern.compile("[0-9A-Z][0-9]{7}[A-Z]");
 		Matcher emparejador = dniPatron.matcher((dni));
@@ -58,7 +73,7 @@ public class Cliente {
 	}
 
 	/* metodo privado comprueba codigo postal */
-	private boolean compruebaCodigoPostal(String codigoPostal) {
+	private static boolean compruebaCodigoPostal(String codigoPostal) {
 		/* expresionRegular */
 		Pattern cpPatron = Pattern.compile("0[1-9][0-9]{3}|[1-4][0-9]{4}|5[0-2][0-9]{3}\n" + "\n" + "$");
 		Matcher emparejador = cpPatron.matcher((codigoPostal));
