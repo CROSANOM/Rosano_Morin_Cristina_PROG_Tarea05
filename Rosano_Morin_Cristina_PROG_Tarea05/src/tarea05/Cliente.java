@@ -59,31 +59,42 @@ public class Cliente {
 	/* metodo privado comprueba dni */
 	private static boolean compruebaDni(String dni) {
 
-		Pattern dniPatron = Pattern.compile("[0-9A-Z][0-9]{7}[A-Z]");
+		boolean dniComprobado = false; // declara variable que contendra valor emparejador.matches
+
+		Pattern dniPatron = Pattern.compile("[0-9A-Z][0-9]{7}[A-Z]");/* expresionRegular */
 		Matcher emparejador = dniPatron.matcher((dni));
-		if (emparejador.matches()) {
+
+		dniComprobado = emparejador.matches(); // se guarda el resultado del metodo emparejador.matches en una variable
+
+		if (dniComprobado) { // if siempre valida a false
 			System.out.println(" El dni es Correcto");
 
 		} else {
-			System.out.println("La matricula es incorrecta, lanzar excepcion");
+			System.out.println("El dni es Incorrecto");
 
 		}
-		return emparejador.matches();
+		return dniComprobado;
 
 	}
 
 	/* metodo privado comprueba codigo postal */
 	private static boolean compruebaCodigoPostal(String codigoPostal) {
-		/* expresionRegular */
+
+		boolean codigoPostalComprobado = false;
+
 		Pattern cpPatron = Pattern.compile("0[1-9][0-9]{3}|[1-4][0-9]{4}|5[0-2][0-9]{3}\n" + "\n" + "$");
 		Matcher emparejador = cpPatron.matcher((codigoPostal));
-		if (emparejador.matches()) {
+
+		codigoPostalComprobado = emparejador.matches(); // se guarda el resultado del metodo emparejador.matches en una
+														// variable
+
+		if (codigoPostalComprobado) {
 			System.out.println(" El codigo Postal es Correcto");
 		} else {
 			System.out.println("El codigo Postal NO es Correcto");
 		}
 
-		return emparejador.matches();
+		return codigoPostalComprobado;
 
 	}
 
