@@ -20,7 +20,9 @@ public class Cliente {
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.localidad = localidad;
-
+		
+ // comprueba que Dni 
+		
 		dniCorrecto = compruebaDni(dni);
 		codigoCorrecto = compruebaCodigoPostal(codigoPostal);
 		// Comprobar dni o lanzar excepcion.
@@ -59,46 +61,46 @@ public class Cliente {
 	/* metodo privado comprueba dni */
 	private static boolean compruebaDni(String dni) {
 
-		boolean dniComprobado = false; // declara variable que contendra valor emparejador.matches
+		boolean dniValidado = false; // declara variable que contendra valor emparejador.matches
 
 		Pattern dniPatron = Pattern.compile("[0-9A-Z][0-9]{7}[A-Z]");/* expresionRegular */
 		Matcher emparejador = dniPatron.matcher((dni));
 
-		dniComprobado = emparejador.matches(); // se guarda el resultado del metodo emparejador.matches en una variable
+		dniValidado = emparejador.matches(); // se guarda el resultado del metodo emparejador.matches en una variable
 
-		if (dniComprobado) { // if siempre valida a false
+		if (dniValidado) { // if siempre valida a false
 			System.out.println(" El dni es Correcto");
 
 		} else {
 			System.out.println("El dni es Incorrecto");
 
 		}
-		return dniComprobado;
+		return dniValidado;
 
 	}
 
 	/* metodo privado comprueba codigo postal */
 	private static boolean compruebaCodigoPostal(String codigoPostal) {
 
-		boolean codigoPostalComprobado = false;
+		boolean codigoPostalValidado = false;
 
 		Pattern cpPatron = Pattern.compile("0[1-9][0-9]{3}|[1-4][0-9]{4}|5[0-2][0-9]{3}\n" + "\n" + "$");
 		Matcher emparejador = cpPatron.matcher((codigoPostal));
 
-		codigoPostalComprobado = emparejador.matches(); // se guarda el resultado del metodo emparejador.matches en una
+		codigoPostalValidado = emparejador.matches(); // se guarda el resultado del metodo emparejador.matches en una
 														// variable
 
-		if (codigoPostalComprobado) {
+		if (codigoPostalValidado) {
 			System.out.println(" El codigo Postal es Correcto");
 		} else {
 			System.out.println("El codigo Postal NO es Correcto");
 		}
 
-		return codigoPostalComprobado;
+		return codigoPostalValidado;
 
 	}
 
-	// Punto 7 Crear los métodos get para cada uno de los atributos.
+	// Punto 7 Crear los métodos get para cada uno de los atributos
 
 	/**
 	 * @return the nombre
