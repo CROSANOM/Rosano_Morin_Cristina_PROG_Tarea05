@@ -30,23 +30,29 @@ public class Turismo {
 
 	}
 
-	// Crear el metodo comprueba matricula
 
-	/* metodo privado comprueba matricula */
-	private boolean compruebaMatricula(String matricula) {
+
+	/* metodo privado comprueba matricula es estatico no requiere de un objeto*/
+	private static boolean compruebaMatricula(String matricula) {
+		
+		boolean matriculaCorrecta = false;
+		
 		Pattern matriculaPatron = Pattern.compile(" \"^([0-9]{4})([A-Z&&[^AEIOIU]]{3}$)\"");
 		Matcher emparejador = matriculaPatron.matcher((matricula));
-		if (emparejador.matches()) {
+		
+		matriculaCorrecta = emparejador.matches();
+		
+		if (matriculaCorrecta) {
 			System.out.println("La matricula  es Correcto");
 
 		} else {
 			System.out.println("La matricula es incorrecta ");
 
 		}
-		return emparejador.matches();
+		
+		return matriculaCorrecta;
 
 		// punto 11 metodos getter de los atributos
-
 	}
 
 	/**
@@ -85,7 +91,7 @@ public class Turismo {
 	}
 
 	// punto11 Crear un método llamado toString que devolverá un String y será la
-	// representación del turismo.
+	// representación del turismo
 
 	/*
 	 * (non-Javadoc)
@@ -95,7 +101,14 @@ public class Turismo {
 	@Override
 	public String toString() {
 		return "Turismo [matricula=" + matricula + ", marca=" + marca + ", modelo=" + modelo + ", cilindrada="
-				+ cilindrada + ", disponibilidad=" + disponibilidad + "]";
+				+ cilindrada + ", disponibilidad=" + isDisponibilidad() + "]";
+	}
+
+	/**
+	 * @param disponibilidad the disponibilidad to set
+	 */
+	public void setDisponibilidad(boolean disponibilidad) {
+		this.disponibilidad = disponibilidad;
 	}
 
 }
