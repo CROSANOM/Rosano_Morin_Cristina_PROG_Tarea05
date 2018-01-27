@@ -1,12 +1,10 @@
 package tarea05;
 
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
-
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author crosanom
@@ -17,30 +15,29 @@ import java.util.GregorianCalendar;
 
 public class Alquiler {
 
-	private Date fecha;  
+	private Date fecha;
 	private int dias, MS_DIA;
 	private final SimpleDateFormat FORMATO_FECHA = new SimpleDateFormat("dd/MM/yyyy");// incialiazación del objeto
 	private final double PRECIO_DIA = 0;
-	private Cliente cliente;  
-	private Turismo turismo;  
+	private Cliente cliente;
+	private Turismo turismo;
 
-	// Usar los metodos de Date para Obtener fecha de sistema y segmentarlo año, mes, dia 
-	// Calendar 
-	
-	 Calendar calendario = new GregorianCalendar(); // creamos un objeto calendarioGregoriano
-	
-	
+	// Usar los metodos de Date para Obtener fecha de sistema y segmentarlo año,
+	// mes, dia
+	// Calendar
+
+	Calendar calendario = new GregorianCalendar(); // creamos un objeto calendarioGregoriano
+
 	// punto14 crear un constructor clase Alquiler con Cliente Turismo como
 	// parametros
 
 	public Alquiler(Cliente cliente, Turismo turismo) {
-		
 		this.cliente = cliente;
 		this.turismo = turismo;
-		this.fecha= new Date ();// Inicializa la fecha a la fecha actual 
-		this.dias=0; // inicializa los dias a cero
+		this.fecha = new Date();// Inicializa la fecha a la fecha actual
+		this.dias = 0; // inicializa los dias a cero
 		this.turismo.setDisponibilidad(false); // inicializa la disponibilidad a false
-		
+
 	}
 
 	// punto15 crear los métodos get para los atributos de la clase Alquiler
@@ -48,7 +45,7 @@ public class Alquiler {
 	 * @return the fecha
 	 */
 	public Date getFecha() { // obtenemos la fecha del sistema porque fecha guarda esa información
-		return fecha;        
+		return fecha;
 	}
 
 	/**
@@ -88,17 +85,38 @@ public class Alquiler {
 	 * método close
 	 */
 
-	// metodoDifDias
+	// metodo para DifDias url
+	// https://github.com/Masqueprogramar/JavaBasico/blob/master/src/com/masqueprogramar/util/UtilesFecha.java
 
-	int diferenciaDias = 0; // declára de manera global para que no chille y se pueda usar en
-							// metodoGetPrecio
+	int diferenciaDias = 0;
 
-	private int diferenciaDias(SimpleDateFormat FORMATO_FECHAsalida, SimpleDateFormat FORMATO_FECHA_entrada) {
-
-		return diferenciaDias;
+	private int diferenciaDiasEntreDosFechas(Date fechaAlquiler, Date fechaDevolucion) {
+		long startTime = fechaAlquiler.getTime();
+		long endTime = fechaDevolucion.getTime();
+		long diffTime = endTime - startTime;
+		diferenciaDias = (int) TimeUnit.DAYS.convert(diffTime, TimeUnit.MILLISECONDS);
+		return (diferenciaDias); // se pasa el valor el metodo TimeUnit a diferenciaDias
 	}
 
-	//Punto 17 GetPrecio Metodo calcule el precio total ( 30 euros * Ndias + cilindra/100 )
+	// metodo Close Cierra Alquiler
+
+	public void cerrar() {
+		Date ahora = new Date();
+
+		if (diferenciaDias == 0) { // condicion para ver numero de dias 
+			dias = +1;
+		}
+
+		else {
+			dias = 1 + diferenciaDias;
+		}
+
+		this.turismo.setDisponibilidad(true); //pone turismo disponible 
+		
+	}
+
+	// Punto 17 GetPrecio Metodo calcule el precio total ( 30 euros * Ndias +
+	// cilindra/100 )
 
 	public double getPrecio(double PRECIO_DIA, int dias, Turismo cilindrada) { // parametros del getPrecio
 
