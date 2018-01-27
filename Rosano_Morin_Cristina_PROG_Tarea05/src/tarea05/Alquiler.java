@@ -1,9 +1,12 @@
 package tarea05;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.FormAction;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+
 
 /**
  * @author crosanom
@@ -14,33 +17,38 @@ import javax.swing.text.html.HTMLDocument.HTMLReader.FormAction;
 
 public class Alquiler {
 
-	private Date fecha;
+	private Date fecha;  
 	private int dias, MS_DIA;
 	private final SimpleDateFormat FORMATO_FECHA = new SimpleDateFormat("dd/MM/yyyy");// incialiazación del objeto
 	private final double PRECIO_DIA = 0;
+	private Cliente cliente;  
+	private Turismo turismo;  
 
-	// declarar atributo Cliente cliente Turismo turismo para la clase Alquiler
-	private Cliente cliente;
-	private Turismo turismo;
-
+	// Usar los metodos de Date para Obtener fecha de sistema y segmentarlo año, mes, dia 
+	// Calendar 
+	
+	 Calendar calendario = new GregorianCalendar(); // creamos un objeto calendarioGregoriano
+	
+	
 	// punto14 crear un constructor clase Alquiler con Cliente Turismo como
 	// parametros
 
 	public Alquiler(Cliente cliente, Turismo turismo) {
-		// como inicializar los atributos de otra clase ;
+		
 		this.cliente = cliente;
 		this.turismo = turismo;
-
-		// turismo.setDisponibilidad(false);
-
+		this.fecha= new Date ();// Inicializa la fecha a la fecha actual 
+		this.dias=0; // inicializa los dias a cero
+		this.turismo.setDisponibilidad(false); // inicializa la disponibilidad a false
+		
 	}
 
 	// punto15 crear los métodos get para los atributos de la clase Alquiler
 	/**
 	 * @return the fecha
 	 */
-	public Date getFecha() {
-		return fecha;
+	public Date getFecha() { // obtenemos la fecha del sistema porque fecha guarda esa información
+		return fecha;        
 	}
 
 	/**
@@ -90,7 +98,7 @@ public class Alquiler {
 		return diferenciaDias;
 	}
 
-	// Metodo calcule el precio total ( 30 euros * Ndias + cilindra/100 )
+	//Punto 17 GetPrecio Metodo calcule el precio total ( 30 euros * Ndias + cilindra/100 )
 
 	public double getPrecio(double PRECIO_DIA, int dias, Turismo cilindrada) { // parametros del getPrecio
 
@@ -102,7 +110,7 @@ public class Alquiler {
 	}
 
 	// Punto18 Crear un método llamado toString y que devuelva un String que será la
-	// representación del alquiler
+	// representación del alquiler.
 
 	/*
 	 * (non-Javadoc)
@@ -112,10 +120,7 @@ public class Alquiler {
 	@Override
 	public String toString() {
 		return "Alquiler [fecha=" + fecha + ", dias=" + dias + ", MS_DIA=" + MS_DIA + ", FORMATO_FECHA=" + FORMATO_FECHA
-				+ ", PRECIO_DIA=" + PRECIO_DIA + ", cliente=" + cliente + ", turismo=" + turismo + ", diferenciaDias="
-				+ diferenciaDias + ", getFecha()=" + getFecha() + ", getDias()=" + getDias() + ", getMS_DIA()="
-				+ getMS_DIA() + ", getFORMATO_FECHA()=" + getFORMATO_FECHA() + ", getPRECIO_DIA()=" + getPRECIO_DIA()
-				+ "]";
+				+ ", PRECIO_DIA=" + PRECIO_DIA + ", cliente=" + cliente + ", turismo=" + turismo + "]";
 	}
 
 }
