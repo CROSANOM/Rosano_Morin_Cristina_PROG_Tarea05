@@ -128,7 +128,7 @@ public class Alquiler {
 	}
 
 	// Punto18 Crear un método llamado toString y que devuelva un String que será la
-	// representación del alquiler.
+	// representación del alquiler
 
 	/*
 	 * (non-Javadoc)
