@@ -103,7 +103,7 @@ public class Alquiler {
 	public void cerrar() {
 		Date ahora = new Date();
 
-		if (diferenciaDias == 0) { // condicion para ver numero de dias 
+		if (diferenciaDias == 0) { // condicion para ver numero de dias
 			dias = +1;
 		}
 
@@ -111,8 +111,8 @@ public class Alquiler {
 			dias = 1 + diferenciaDias;
 		}
 
-		this.turismo.setDisponibilidad(true); //pone turismo disponible 
-		
+		this.turismo.setDisponibilidad(true); // pone turismo disponible
+
 	}
 
 	// Punto 17 GetPrecio Metodo calcule el precio total ( 30 euros * Ndias +
@@ -128,7 +128,7 @@ public class Alquiler {
 	}
 
 	// Punto18 Crear un método llamado toString y que devuelva un String que será la
-	// representación del alquiler
+	// representación del alquiler.
 
 	/*
 	 * (non-Javadoc)
