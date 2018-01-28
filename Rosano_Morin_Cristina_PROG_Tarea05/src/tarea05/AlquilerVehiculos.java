@@ -10,15 +10,17 @@ package tarea05;
 
 public class AlquilerVehiculos {
 
-	private int MAX_TURISMO = 100; // indicar el tamaño del array
-	private int MAX_CLIENTES = 50;
-	private int MAX_ALQUILERES = 50;
 
-	private Turismo[] turismo; // tipo Turismo
-	private Cliente[] clientes; // tipo Cliente
-	private Alquiler[] alquileres; // tipo Alquiler
+	private Turismo[] turismo; // Array de tipo Turismo
+	private Cliente[] clientes; // Array de tipo Cliente
+	private Alquiler[] alquileres; // Array de tipo Alquiler
 
-	// Punto2 0 constructor por defecto crear los atributos instancia arrays
+	private int MAX_TURISMO = 120; // indicar el tamaño del array se quiere tener 50 turismo de reserva
+	private int MAX_CLIENTES = 100;
+	private int MAX_ALQUILERES = 100;
+
+
+	// Punto20 constructor por defecto crear los atributos instancia arrays
 
 	public AlquilerVehiculos() {
 
@@ -73,12 +75,29 @@ public class AlquilerVehiculos {
 
 	// Punto22 Crear el metodo get Cliente (String DNI )
 
-	public String getCliente(String dni) {
-
-		
-
-		return dni;
-
-	}
+	
 
 }
+
+// METODO QUE BORRA CLIENTES DESPUES DE ENCONTRARLOS 
+
+/*public void borrarCliente(String dni) {
+int posicion = 0;// posicion es el i del array  primero se parte de cero posicion 
+
+boolean encontrado = false; // encontrado a priori se parte como nulo 
+while (posicion < clientes.length && !encontrado) {
+    if (clientes[posicion] != null && clientes[posicion].getDni().equals(dni))
+        encontrado = true;
+    else
+        posicion++;
+}
+if (encontrado) {
+    for (int i = posicion; i < clientes.length - 1; i++) {
+        clientes[i] = clientes[i+1];
+    }
+    clientes[clientes.length - 1] = null;
+}
+else {
+    throw new ExcepcionTallerMecanico("El cliente a borrar no existe");
+}
+}*/
