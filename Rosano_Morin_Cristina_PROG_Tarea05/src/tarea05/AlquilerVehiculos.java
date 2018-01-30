@@ -1,5 +1,7 @@
 package tarea05;
 
+
+
 /**
  * @author crosanom
  *
@@ -18,7 +20,7 @@ public class AlquilerVehiculos {
 	private int MAX_CLIENTES = 100;
 	private int MAX_ALQUILERES = 100;
 
-	// Punto20 constructor por defecto crear los atributos instancia arrays
+	// Punto20 constructor inicializa los atributos crea los array
 
 	public AlquilerVehiculos() {
 
@@ -73,6 +75,21 @@ public class AlquilerVehiculos {
 
 	// Punto22 Crear el metodo get Cliente (String DNI ) similar al metodo Cliente
 	// buscar de la tarea de Taller Mecanico
+
+	public Cliente getCliente(String dni) {
+		int posicion = 0;
+		boolean encontrado = false;
+		while (posicion < clientes.length && !encontrado) {
+			if (clientes[posicion] != null && clientes[posicion].getDni().equals(dni))
+				encontrado = true;
+			else
+				posicion++;
+		}
+		if (encontrado)
+			return clientes[posicion];
+		else
+			return null;
+	}
 
 }
 
