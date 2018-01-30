@@ -91,6 +91,36 @@ public class AlquilerVehiculos {
 			return null;
 	}
 
+	/*
+	 * Punto23 Crear metodo añadirCliente ue añada un cliente al array de clientes
+	 * si cabe y si no existe ningún otro con el mismo DNI o lance una excepción en
+	 * caso contrario.
+	 */
+
+	
+	public void anadirCliente(Cliente cliente) { 
+		 int posicion = 0;
+		boolean posicionEncontrada = false;
+		while ( posicion  < clientes.length && !posicionEncontrada ){ // mientras posicion sea menor que el array y que distinta a la encontrada
+			if (clientes[posicion] == null) // si posición esta vacia 
+				posicionEncontrada = true; //  posicion pasa de false a encontrada 
+			else if (clientes[posicion].getDni().equals(cliente.getDni())) // si la posición en la que estoy tiene un  dni es igual al dni de mi cliente que quiero añadir 
+				throw new ExcepcionAlquilerVehiculos("Ya existe un cliente con ese DNI"); // salta excepción con msm cliente exite 
+			else
+				posicion++; //  sino paso a la posición siguiente
+		}
+		if (posicionEncontrada) // y posicion encontrada true 
+			clientes[posicion] = cliente; // por tanto entró en if ejecuto  guardo en la posicion en la que  estoy un cliente nuevo ( añado un cliente ) 
+		else
+			throw new ExcepcionAlquilerVehiculos("El array de clientes está lleno."); // sino lanzo una excepcion 
+	}
+
+	
+	
+	
+	
+	
+	
 }
 
 // METODO QUE BORRA CLIENTES DESPUES DE ENCONTRARLOS
