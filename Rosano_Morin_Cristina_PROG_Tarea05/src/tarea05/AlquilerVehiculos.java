@@ -71,7 +71,8 @@ public class AlquilerVehiculos {
 		return alquileres;
 	}
 
-	// Punto22 Crear el metodo get Cliente (String DNI )
+	// Punto22 Crear el metodo get Cliente (String DNI ) similar al metodo Cliente
+	// buscar de la tarea de Taller Mecanico
 
 }
 
