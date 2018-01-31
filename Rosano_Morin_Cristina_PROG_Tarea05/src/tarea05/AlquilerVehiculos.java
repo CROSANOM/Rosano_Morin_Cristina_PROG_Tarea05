@@ -284,7 +284,7 @@ public class AlquilerVehiculos {
 	 * @param cliente
 	 * @param turismo
 	 */
-	public void openAlquiler(Cliente cliente, Turismo turismo) {
+	public void abrirAlquiler(Cliente cliente, Turismo turismo) {
 
 		int posicion = 0;
 		boolean posicionEncontrada = false;
@@ -297,6 +297,7 @@ public class AlquilerVehiculos {
 				if (alquileres[posicion] == null) {
 					alquileres[posicion] = new Alquiler(cliente, turismo);
 					posicionEncontrada = true;
+					turismos[posicion].setDisponibilidad(false);
 					System.out.println("Alquiler creado con éxito.");
 				}
 			}
@@ -306,6 +307,49 @@ public class AlquilerVehiculos {
 
 		} else {
 			throw new ExcepcionAlquilerVehiculos("El vehiculo no está disponible.");
+		}
+
+	}
+
+	/*
+	 * Punto29 Crea un método closeAlquiler que cierre el alquiler dado un cliente y
+	 * un turismo
+	 */
+
+	/**
+	 * @param cliente
+	 * @param turismo
+	 */
+	public void cerrarAlquiler(Cliente cliente, Turismo turismo) {
+
+		int posicion = 0;
+		boolean posicionEncontrada = false;
+
+		// Buscar en el array por los parámetros.
+		while (posicion < alquileres.length && !posicionEncontrada) {
+
+			// Comprobar si el alquiler esta abierto.
+			if (alquileres[posicion].getDias() == 0) {
+				// Comparar uno de los parámetros del alquiler.
+				if (alquileres[posicion].getCliente().getDni() == cliente.getDni()
+						&& alquileres[posicion].getTurismo().getMatricula() == turismo.getMatricula()) {
+					posicionEncontrada = true;
+					// Cerrar alquiler.
+					alquileres[posicion].cerrarAlquiler();
+					System.out.println("Alquiler cerrado con éxito.");
+
+				} else {
+					// Si no es el alquiler, se pasa posicion.
+					posicion++;
+				}
+
+			} else {
+				posicion++;
+			}
+		}
+
+		if (!posicionEncontrada) {
+			System.out.println("No existe ese alquiler con esos datos.");
 		}
 
 	}
