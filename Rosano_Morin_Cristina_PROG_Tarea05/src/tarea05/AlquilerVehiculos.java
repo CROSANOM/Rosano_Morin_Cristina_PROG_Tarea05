@@ -10,7 +10,7 @@ package tarea05;
 
 public class AlquilerVehiculos {
 
-	private Turismo[] turismo; // Array de tipo Turismo
+	private Turismo[] turismos; // Array de tipo Turismo
 	private Cliente[] clientes; // Array de tipo Cliente
 	private Alquiler[] alquileres; // Array de tipo Alquiler
 
@@ -23,7 +23,7 @@ public class AlquilerVehiculos {
 	public AlquilerVehiculos() {
 
 		clientes = new Cliente[MAX_CLIENTES];
-		turismo = new Turismo[MAX_TURISMO];
+		turismos = new Turismo[MAX_TURISMO];
 		alquileres = new Alquiler[MAX_ALQUILERES];
 	}
 
@@ -53,7 +53,7 @@ public class AlquilerVehiculos {
 	 * @return the turismo
 	 */
 	public Turismo[] getTurismo() {
-		return turismo;
+		return turismos;
 	}
 
 	/**
@@ -180,14 +180,14 @@ public class AlquilerVehiculos {
 		int posicion = 0;
 		boolean encontrado = false;
 
-		while (posicion < turismo.length && !encontrado) {
-			if (turismo[posicion] != null && turismo[posicion].getMatricula().equals(matricula))
+		while (posicion < turismos.length && !encontrado) {
+			if (turismos[posicion] != null && turismos[posicion].getMatricula().equals(matricula))
 				encontrado = true;
 			else
 				posicion++;
 		}
 		if (encontrado)
-			return turismo[posicion]; // devuelve Turismo turismo
+			return turismos[posicion]; // devuelve Turismo turismo
 		else
 			return null; //
 	}
@@ -201,21 +201,21 @@ public class AlquilerVehiculos {
 	/**
 	 * @param turismos
 	 */
-	public void anadeTurismo(Turismo turismos) {
+	public void anadeTurismo(Turismo turismo) {
 
 		int posicion = 0;
 		boolean posicionEncontrada = false;
 
-		while (posicion < turismo.length && !posicionEncontrada) { // mientras posicion sea menor que el array y que
+		while (posicion < turismos.length && !posicionEncontrada) { // mientras posicion sea menor que el array y que
 			// distinta a la encontrada
-			if (turismo[posicion] == null) // si posición esta vacia
+			if (turismos[posicion] == null) // si posición esta vacia
 				posicionEncontrada = true; // posicion pasa de false a encontrada
 
 			/*
 			 * si la posición en la que estoy tiene un turismo y es igual al matricula de mi
 			 * turismo que quiero añadir
 			 */
-			else if (turismo[posicion].getMatricula().equals(turismos.getMatricula()))
+			else if (turismos[posicion].getMatricula().equals(turismo.getMatricula()))
 
 				throw new ExcepcionAlquilerVehiculos("Ya existe un tursimo con esta matricula"); // salta excepción con
 																									// msm
@@ -226,7 +226,7 @@ public class AlquilerVehiculos {
 
 		// Si habia hueco y no está repetido, se añade el turismo.
 		if (posicionEncontrada)
-			turismo[posicion] = turismos;
+			turismos[posicion] = turismo;
 		else
 			throw new ExcepcionAlquilerVehiculos("El array de turismo está lleno."); // sino lanzo una excepcion
 	}
@@ -244,18 +244,18 @@ public class AlquilerVehiculos {
 		int posicion = 0;
 		boolean posicionEncontrada = false;
 
-		while (posicion < turismo.length && !posicionEncontrada) {
+		while (posicion < turismos.length && !posicionEncontrada) {
 
-			if (turismo[posicion] == null) // Posicion vacia.
+			if (turismos[posicion] == null) // Posicion vacia.
 				posicion++; // No hay turismo, pasar siguiente.
 
 			else {
 
-				if (turismo[posicion].getMatricula().equals(matricula)) {
+				if (turismos[posicion].getMatricula().equals(matricula)) {
 
-					if (turismo[posicion].isDisponibilidad()) {
+					if (turismos[posicion].isDisponibilidad()) {
 						// Borro cliente y salgo del while.
-						turismo[posicion] = null;
+						turismos[posicion] = null;
 						posicionEncontrada = true;
 						System.out.println("Eliminado el turismo con éxito");
 					} else {
@@ -270,6 +270,42 @@ public class AlquilerVehiculos {
 
 		if (!posicionEncontrada) {
 			System.out.println("No existe el turismo a borrar.");
+		}
+
+	}
+
+	/*
+	 * Punto 28 Crea un método openAlquiler que dado un cliente y un turismo cree un
+	 * nuevo alquiler y lo añada al array de alquileres. Para ello se debe comprobar
+	 * que el turismo esté disponible. Haz un commit.
+	 */
+
+	/**
+	 * @param cliente
+	 * @param turismo
+	 */
+	public void openAlquiler(Cliente cliente, Turismo turismo) {
+
+		int posicion = 0;
+		boolean posicionEncontrada = false;
+
+		// Si el vehiculo está disponible se busca hueco en array.
+		if (turismo.isDisponibilidad()) {
+			// Buscamos un hueco en el array.
+			while (posicion < alquileres.length && !posicionEncontrada) {
+				// Si la posicion está vacia se puede asignar el alquiler.
+				if (alquileres[posicion] == null) {
+					alquileres[posicion] = new Alquiler(cliente, turismo);
+					posicionEncontrada = true;
+					System.out.println("Alquiler creado con éxito.");
+				}
+			}
+			// Si no ha encontrado un hueco vacio.
+			if (posicionEncontrada == false)
+				System.out.println("Alquileres al máximo.");
+
+		} else {
+			throw new ExcepcionAlquilerVehiculos("El vehiculo no está disponible.");
 		}
 
 	}
