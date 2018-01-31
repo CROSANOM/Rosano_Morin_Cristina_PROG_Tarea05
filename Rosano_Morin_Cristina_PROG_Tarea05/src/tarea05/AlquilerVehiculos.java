@@ -76,6 +76,7 @@ public class AlquilerVehiculos {
 	public Cliente getCliente(String dni) {
 		int posicion = 0;
 		boolean encontrado = false;
+
 		while (posicion < clientes.length && !encontrado) {
 			if (clientes[posicion] != null && clientes[posicion].getDni().equals(dni))
 				encontrado = true;
@@ -83,7 +84,7 @@ public class AlquilerVehiculos {
 				posicion++;
 		}
 		if (encontrado)
-			return clientes[posicion];
+			return clientes[posicion]; // devuelve Cliente cliente
 		else
 			return null;
 	}
@@ -107,8 +108,10 @@ public class AlquilerVehiculos {
 			if (clientes[posicion] == null) // si posición esta vacia
 				posicionEncontrada = true; // posicion pasa de false a encontrada
 
-			// si la posición en la que estoy tiene un dni es igual al dni de mi cliente que
-			// quiero añadir
+			/*
+			 * si la posición en la que estoy tiene un dni y es igual al dni de mi cliente
+			 * que quiero añadir
+			 */
 			else if (clientes[posicion].getDni().equals(cliente.getDni()))
 
 				throw new ExcepcionAlquilerVehiculos("Ya existe un cliente con ese DNI"); // salta excepción con msm
@@ -117,12 +120,43 @@ public class AlquilerVehiculos {
 				posicion++; // sino paso a la posición siguiente
 		}
 
-		// Si habia hueco y no está repetido, añade el cliente.
+		// Si habia hueco y no está repetido, se añade el cliente.
 		if (posicionEncontrada)
 			clientes[posicion] = cliente;
 		else
 			throw new ExcepcionAlquilerVehiculos("El array de clientes está lleno."); // sino lanzo una excepcion
 	}
 
+	/*
+	 * Punto24 Crea un método delCliente que borre un cliente, dado su DNI (
+	 * parametro) del array de clientes si este existe
+	 */
+
+	/**
+	 * @param dni
+	 */
+	public void borrarCliente(String dni) {
+
+		int posicion = 0;
+		boolean posicionEncontrado = false;
+
+		while (posicion < clientes.length && !posicionEncontrado) {
+			if (clientes[posicion] != null && clientes[posicion].getDni().equals(dni))// posicion contenido y dni
+																						// coincide con dni posicion
+				posicionEncontrado = true; // posicion true
+			else
+				posicion++; // si posicion vacia o dni pasado != dniCliente avanzo 1 paso
+		}
+
+		if (posicionEncontrado) { // cumple la condicion posicion dni =dniCliente
+
+			for (int i = posicion; i < clientes.length - 1; i++) { // recorro array 
+				clientes[i] = clientes[i + 1]; // me quedo posicion 
+			}
+			clientes[clientes.length - 1] = null;// borro cliente 
+		} else {
+			throw new ExcepcionAlquilerVehiculos("El cliente a borrar no existe");
+		}
+	}
 
 }
