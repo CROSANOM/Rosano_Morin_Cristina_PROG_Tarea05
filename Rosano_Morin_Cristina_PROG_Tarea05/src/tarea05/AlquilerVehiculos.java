@@ -6,7 +6,7 @@ package tarea05;
  */
 
 // Punto19 Crear la clase AlquilerVehiculos con sus atributos y visibilidad
-// adecuados.
+// adecuados
 
 public class AlquilerVehiculos {
 
