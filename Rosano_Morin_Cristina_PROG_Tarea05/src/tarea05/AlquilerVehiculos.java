@@ -1,7 +1,5 @@
 package tarea05;
 
-
-
 /**
  * @author crosanom
  *
@@ -16,9 +14,9 @@ public class AlquilerVehiculos {
 	private Cliente[] clientes; // Array de tipo Cliente
 	private Alquiler[] alquileres; // Array de tipo Alquiler
 
-	private int MAX_TURISMO = 120; // indicar el tamaño del array se quiere tener 50 turismo de reserva
-	private int MAX_CLIENTES = 100;
-	private int MAX_ALQUILERES = 100;
+	private final int MAX_TURISMO = 120; // indicar el tamaño del array se quiere tener 50 turismo de reserva
+	private final int MAX_CLIENTES = 100;
+	private final int MAX_ALQUILERES = 100;
 
 	// Punto20 constructor inicializa los atributos crea los array
 
@@ -27,19 +25,18 @@ public class AlquilerVehiculos {
 		clientes = new Cliente[MAX_CLIENTES];
 		turismo = new Turismo[MAX_TURISMO];
 		alquileres = new Alquiler[MAX_ALQUILERES];
-
 	}
 
 	// Punto21 Crea los metodos get para cada atributo
 	/**
-	 * @return the mAX_TURISMO
+	 * @return the MAX_TURISMO
 	 */
 	public int getMAX_TURISMO() {
 		return MAX_TURISMO;
 	}
 
 	/**
-	 * @return the mAX_CLIENTES
+	 * @return the MAX_CLIENTES
 	 */
 	public int getMAX_CLIENTES() {
 		return MAX_CLIENTES;
@@ -73,7 +70,7 @@ public class AlquilerVehiculos {
 		return alquileres;
 	}
 
-	// Punto22 Crear el metodo get Cliente (String DNI ) similar al metodo Cliente
+	// Punto22 Crear el metodo getCliente (String DNI ) similar al metodo Cliente
 	// buscar de la tarea de Taller Mecanico
 
 	public Cliente getCliente(String dni) {
@@ -92,35 +89,70 @@ public class AlquilerVehiculos {
 	}
 
 	/*
-	 * Punto23 Crear metodo añadirCliente ue añada un cliente al array de clientes
-	 * si cabe y si no existe ningún otro con el mismo DNI o lance una excepción en
-	 * caso contrario.
+	 * Punto23 Crear metodo añadirCliente que se le pasa por parametro un cliente
+	 * que añada un cliente al array de clientes si cabe y si no existe ningún otro
+	 * con el mismo DNI o lance una excepción en caso contrario.
 	 */
 
-	
-	public void anadirCliente(Cliente cliente) { 
-		 int posicion = 0;
+	/**
+	 * @param cliente
+	 */
+	public void anadeCliente(Cliente cliente) {
+
+		int posicion = 0;
 		boolean posicionEncontrada = false;
-		while ( posicion  < clientes.length && !posicionEncontrada ){ // mientras posicion sea menor que el array y que distinta a la encontrada
-			if (clientes[posicion] == null) // si posición esta vacia 
-				posicionEncontrada = true; //  posicion pasa de false a encontrada 
-			else if (clientes[posicion].getDni().equals(cliente.getDni())) // si la posición en la que estoy tiene un  dni es igual al dni de mi cliente que quiero añadir 
-				throw new ExcepcionAlquilerVehiculos("Ya existe un cliente con ese DNI"); // salta excepción con msm cliente exite 
+
+		while (posicion < clientes.length && !posicionEncontrada) { // mientras posicion sea menor que el array y que
+																	// distinta a la encontrada
+			if (clientes[posicion] == null) // si posición esta vacia
+				posicionEncontrada = true; // posicion pasa de false a encontrada
+
+			// si la posición en la que estoy tiene un dni es igual al dni de mi cliente que
+			// quiero añadir
+			else if (clientes[posicion].getDni().equals(cliente.getDni()))
+
+				throw new ExcepcionAlquilerVehiculos("Ya existe un cliente con ese DNI"); // salta excepción con msm
+																							// cliente exite
 			else
-				posicion++; //  sino paso a la posición siguiente
+				posicion++; // sino paso a la posición siguiente
 		}
-		if (posicionEncontrada) // y posicion encontrada true 
-			clientes[posicion] = cliente; // por tanto entró en if ejecuto  guardo en la posicion en la que  estoy un cliente nuevo ( añado un cliente ) 
+
+		// Si habia hueco y no está repetido, añade el cliente.
+		if (posicionEncontrada)
+			clientes[posicion] = cliente;
 		else
-			throw new ExcepcionAlquilerVehiculos("El array de clientes está lleno."); // sino lanzo una excepcion 
+			throw new ExcepcionAlquilerVehiculos("El array de clientes está lleno."); // sino lanzo una excepcion
 	}
 
-	
-	
-	
-	
-	
-	
+	public void delCliente(Cliente cliente) {
+
+		int posicion = 0;
+		boolean posicionEncontrada = false;
+
+		while (posicion < clientes.length && !posicionEncontrada) {
+
+			if (clientes[posicion] == null) // Posicion vacia.
+				posicion++; // No hay cliente, pasar siguiente.
+
+			else {
+
+				if (clientes[posicion].getDni().equals(cliente.getDni())) {
+					// Borro cliente y salgo del while.
+					clientes[posicion] = null;
+					posicionEncontrada = true;
+					System.out.println("Eliminado el cliente con éxito");
+
+				} else
+					posicion++;
+			}
+		}
+
+		if (!posicionEncontrada) {
+			System.out.println("No existe el cliente a borrar.");
+		}
+
+	}
+
 }
 
 // METODO QUE BORRA CLIENTES DESPUES DE ENCONTRARLOS
