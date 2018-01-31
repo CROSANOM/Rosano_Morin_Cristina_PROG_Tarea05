@@ -103,7 +103,7 @@ public class AlquilerVehiculos {
 		boolean posicionEncontrada = false;
 
 		while (posicion < clientes.length && !posicionEncontrada) { // mientras posicion sea menor que el array y que
-																	// distinta a la encontrada
+			// distinta a la encontrada
 			if (clientes[posicion] == null) // si posición esta vacia
 				posicionEncontrada = true; // posicion pasa de false a encontrada
 
@@ -112,7 +112,7 @@ public class AlquilerVehiculos {
 			else if (clientes[posicion].getDni().equals(cliente.getDni()))
 
 				throw new ExcepcionAlquilerVehiculos("Ya existe un cliente con ese DNI"); // salta excepción con msm
-																							// cliente exite
+			// cliente exite
 			else
 				posicion++; // sino paso a la posición siguiente
 		}
@@ -124,48 +124,5 @@ public class AlquilerVehiculos {
 			throw new ExcepcionAlquilerVehiculos("El array de clientes está lleno."); // sino lanzo una excepcion
 	}
 
-	public void delCliente(Cliente cliente) {
-
-		int posicion = 0;
-		boolean posicionEncontrada = false;
-
-		while (posicion < clientes.length && !posicionEncontrada) {
-
-			if (clientes[posicion] == null) // Posicion vacia.
-				posicion++; // No hay cliente, pasar siguiente.
-
-			else {
-
-				if (clientes[posicion].getDni().equals(cliente.getDni())) {
-					// Borro cliente y salgo del while.
-					clientes[posicion] = null;
-					posicionEncontrada = true;
-					System.out.println("Eliminado el cliente con éxito");
-
-				} else
-					posicion++;
-			}
-		}
-
-		if (!posicionEncontrada) {
-			System.out.println("No existe el cliente a borrar.");
-		}
-
-	}
 
 }
-
-// METODO QUE BORRA CLIENTES DESPUES DE ENCONTRARLOS
-
-/*
- * public void borrarCliente(String dni) { int posicion = 0;// posicion es el i
- * del array primero se parte de cero posicion
- * 
- * boolean encontrado = false; // encontrado a priori se parte como nulo while
- * (posicion < clientes.length && !encontrado) { if (clientes[posicion] != null
- * && clientes[posicion].getDni().equals(dni)) encontrado = true; else
- * posicion++; } if (encontrado) { for (int i = posicion; i < clientes.length -
- * 1; i++) { clientes[i] = clientes[i+1]; } clientes[clientes.length - 1] =
- * null; } else { throw new
- * ExcepcionTallerMecanico("El cliente a borrar no existe"); } }
- */
