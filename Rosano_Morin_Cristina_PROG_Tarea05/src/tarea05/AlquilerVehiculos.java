@@ -70,8 +70,10 @@ public class AlquilerVehiculos {
 		return alquileres;
 	}
 
-	// Punto22 Crear el metodo getCliente (String DNI ) similar al metodo Cliente
-	// buscar de la tarea de Taller Mecanico
+	/*
+	 * Punto22 Crear el metodo getCliente (String DNI ) similar al metodo Cliente
+	 * buscar de la tarea de Taller Mecanico
+	 */
 
 	public Cliente getCliente(String dni) {
 		int posicion = 0;
@@ -135,28 +137,141 @@ public class AlquilerVehiculos {
 	/**
 	 * @param dni
 	 */
+
 	public void borrarCliente(String dni) {
 
 		int posicion = 0;
-		boolean posicionEncontrado = false;
+		boolean posicionEncontrada = false;
 
-		while (posicion < clientes.length && !posicionEncontrado) {
-			if (clientes[posicion] != null && clientes[posicion].getDni().equals(dni))// posicion contenido y dni
-																						// coincide con dni posicion
-				posicionEncontrado = true; // posicion true
-			else
-				posicion++; // si posicion vacia o dni pasado != dniCliente avanzo 1 paso
-		}
+		while (posicion < clientes.length && !posicionEncontrada) {
 
-		if (posicionEncontrado) { // cumple la condicion posicion dni =dniCliente
+			if (clientes[posicion] == null) // Posicion vacia.
+				posicion++; // No hay cliente, pasar siguiente.
 
-			for (int i = posicion; i < clientes.length - 1; i++) { // recorro array 
-				clientes[i] = clientes[i + 1]; // me quedo posicion 
+			else {
+
+				if (clientes[posicion].getDni().equals(dni)) {
+					// Borro cliente y salgo del while.
+					clientes[posicion] = null;
+					posicionEncontrada = true;
+					System.out.println("Eliminado el cliente con éxito");
+
+				} else
+					posicion++;
 			}
-			clientes[clientes.length - 1] = null;// borro cliente 
-		} else {
-			throw new ExcepcionAlquilerVehiculos("El cliente a borrar no existe");
 		}
+
+		if (!posicionEncontrada) {
+			System.out.println("No existe el cliente a borrar.");
+		}
+
 	}
 
-}
+	/*
+	 * Punto25 Crea un método getTurismo que se le pase la matrícula de un turismo y
+	 * nos lo devuelva si este existe o null en caso contrario.
+	 */
+
+	/**
+	 * @param matricula
+	 * @return
+	 */
+	public Turismo getTurismo(String matricula) {
+		int posicion = 0;
+		boolean encontrado = false;
+
+		while (posicion < turismo.length && !encontrado) {
+			if (turismo[posicion] != null && turismo[posicion].getMatricula().equals(matricula))
+				encontrado = true;
+			else
+				posicion++;
+		}
+		if (encontrado)
+			return turismo[posicion]; // devuelve Turismo turismo
+		else
+			return null; //
+	}
+
+	/*
+	 * Punto 26 Crea un método addTurismo que añada un turismo al array de turismos
+	 * si cabe y no existe ningún otro con la misma matrícula o lance una excepción
+	 * en caso contrario.
+	 */
+
+	/**
+	 * @param turismos
+	 */
+	public void anadeTurismo(Turismo turismos) {
+
+		int posicion = 0;
+		boolean posicionEncontrada = false;
+
+		while (posicion < turismo.length && !posicionEncontrada) { // mientras posicion sea menor que el array y que
+			// distinta a la encontrada
+			if (turismo[posicion] == null) // si posición esta vacia
+				posicionEncontrada = true; // posicion pasa de false a encontrada
+
+			/*
+			 * si la posición en la que estoy tiene un turismo y es igual al matricula de mi
+			 * turismo que quiero añadir
+			 */
+			else if (turismo[posicion].getMatricula().equals(turismos.getMatricula()))
+
+				throw new ExcepcionAlquilerVehiculos("Ya existe un tursimo con esta matricula"); // salta excepción con
+																									// msm
+			// cliente exite
+			else
+				posicion++; // sino paso a la posición siguiente
+		}
+
+		// Si habia hueco y no está repetido, se añade el turismo.
+		if (posicionEncontrada)
+			turismo[posicion] = turismos;
+		else
+			throw new ExcepcionAlquilerVehiculos("El array de turismo está lleno."); // sino lanzo una excepcion
+	}
+
+	/*
+	 * Punto 27 Crea un método delTurismo que borre un turismo, dada su matrícula,
+	 * del array de turismos si este existe
+	 */
+
+	/**
+	 * @param matricula
+	 */
+	public void borrarTurismo(String matricula) {
+
+		int posicion = 0;
+		boolean posicionEncontrada = false;
+
+		while (posicion < turismo.length && !posicionEncontrada) {
+
+			if (turismo[posicion] == null) // Posicion vacia.
+				posicion++; // No hay turismo, pasar siguiente.
+
+			else {
+
+				if (turismo[posicion].getMatricula().equals(matricula)) {
+
+					if (turismo[posicion].isDisponibilidad()) {
+						// Borro cliente y salgo del while.
+						turismo[posicion] = null;
+						posicionEncontrada = true;
+						System.out.println("Eliminado el turismo con éxito");
+					} else {
+						throw new ExcepcionAlquilerVehiculos(
+								"Este turismo está actualmente en uso, no se puede eliminar.");
+					}
+
+				} else
+					posicion++;
+			}
+		}
+
+		if (!posicionEncontrada) {
+			System.out.println("No existe el turismo a borrar.");
+		}
+
+	}
+
+}// finClase
