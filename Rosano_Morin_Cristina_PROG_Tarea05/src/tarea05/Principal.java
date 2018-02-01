@@ -1,126 +1,244 @@
 package tarea05;
 
-
 import utilidades.Entrada;
 
-public class Principal { // clase
+public class Principal {
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
-		// Instanciar un alquilerVehiculo
-		AlquilerVehiculos miAlquilerVehiculos = new AlquilerVehiculos();
+		// instanciar la clase AlquilerVehiculos
 
-		// Generar dos objetos clientes defecto con operado new
+		AlquilerVehiculos miAlquiler = new AlquilerVehiculos();
 
-		Cliente cliente = new Cliente("Cristina", "75875453V", "Calle Melancolia", "Almeria", "04009");
-		Cliente cliente2 = new Cliente("Luis", "31862610C", "Calle Melancolia", "Almeria", "04009");
+		// Creamos y añadimos clientes- turismo - alquiler
 
-		// LLmada metodos
-		miAlquilerVehiculos.anadeCliente(cliente);
-		miAlquilerVehiculos.anadeCliente(cliente2);
-		miAlquilerVehiculos.borrarCliente(cliente.getDni());// borrar el cliente cristina
-		miAlquilerVehiculos.getClientes();//
+		// creamos un nuevo cliente(String nombre, String dni, String direccion, String
+		// localidad, String codigoPostal)
+		Cliente cliente1 = new Cliente("Cristina", "75875453V", "calle Melanc", "Tarifa­", "11380");
+		Cliente cliente2 = new Cliente("Luis", "75875452V", "bb", "Cadiz", "04002");
+		// anadimos los clientes 1 -2
+		miAlquiler.anadeCliente(cliente1);
+		miAlquiler.anadeCliente(cliente2);
 
-		// Generar dos objetos turismo defecto con operado new
+		// Creamos un turismo (String matricula, String marca, String modelo, int
+		// cilindrada)
+		Turismo turismo1 = new Turismo("1111BBB", "Seat", "Ibiza", 1900);
+		Turismo turismo2 = new Turismo("2222BBB", "Opel", "Corsa", 1600);
+		// añadimos turismo
+		miAlquiler.anadeTurismo(turismo1);
+		miAlquiler.anadeTurismo(turismo2);
 
-		Turismo turismo = new Turismo("0727DVL", "Seat", "Ibiza", 1600);
-		Turismo turismo2 = new Turismo("6431DXP", "Citroen", "Picasso", 1900);
+		// creamos un alquiler ( Cliente cliente, Turismo turismo )
+		miAlquiler.abrirAlquiler(cliente1, turismo1);
+		miAlquiler.abrirAlquiler(cliente2, turismo2);
 
-		// añadimos Turismo
-		miAlquilerVehiculos.anadeTurismo(turismo);
-		miAlquilerVehiculos.anadeTurismo(turismo2);
+		// cerrar alquiler del cliente1
 
-		// cerramos Alquiler
-		miAlquilerVehiculos.cerrarAlquiler(cliente2, turismo2);
-		miAlquilerVehiculos.abrirAlquiler(cliente, turismo);
+		miAlquiler.cerrarAlquiler(cliente1, turismo1);
 
-		// abrimos el alquiler
-		miAlquilerVehiculos.abrirAlquiler(cliente2, turismo2);
-		miAlquilerVehiculos.abrirAlquiler(cliente, turismo);
-
-		// for mejorado
-		// recorre un array y obtiene un objeto de dicho
-
-		for (Cliente clientes : miAlquilerVehiculos.getClientes())
+		for (Cliente cliente : miAlquiler.getClientes())
 			if (cliente != null)
 				System.out.println(cliente);
 		System.out.println("--------------");
-		for (Turismo turismos : miAlquilerVehiculos.getTurismo())
-			;
-		if (turismo != null)
-			System.out.println(turismo);
+		for (Turismo turismo : miAlquiler.getTurismo())
+			if (turismo != null)
+				System.out.println(turismo);
 		System.out.println("--------------");
-		for (Alquiler alquiler : miAlquilerVehiculos.getAlquileres())
-			;
-		if (miAlquilerVehiculos != null)
-			System.out.println(miAlquilerVehiculos);
+		for (Alquiler alquiler : miAlquiler.getAlquileres())
+			if (alquiler != null)
+				System.out.println(alquiler);
 
-		// Menu
+		// el menu imprimir el menu y sus opciones
+		int opcion;
 
-		int opcion; // variable para opciones del menu
-
-		// imprime el Menu de la aplicacion.
 		do {
-			System.out.println("\nAlquiler de Vehiculos");
-			System.out.println("---------------");
+			System.out.println("Alquiler Vehiculos");
+			System.out.println("/n---------------");
 			System.out.println("1.- Añadir cliente");
 			System.out.println("2.- Borrar cliente");
 			System.out.println("3.- Listar clientes");
-			System.out.println("4.- Añadir turismo");
-			System.out.println("5.- Borrar turismo");
-			System.out.println("6.- Listar turismos");
-			System.out.println("7.- Abrir alquiler");
+			System.out.println("4.- Añadir ­Turismo");
+			System.out.println("5.- Borrar Turismo");
+			System.out.println("6.- Listar Turismo");
+			System.out.println("7.- Abrir un Alquiler");
 			System.out.println("8.- Cerrar alquiler");
-			System.out.println("9.- Listar alquileres");
+			System.out.println("9.- Listar alquiler");
 			System.out.println("0.- Salir");
 
 			do {
-				System.out.print("\nElige una opción del 1 - 9 para salir usar 0: ");
+				System.out.print("\nElige una opciÃ³n (0-10): ");
 				opcion = Entrada.entero();
-			} while (opcion < 0 || opcion > 9); // itera hasta que la opcion sea la esperada
-			Turismo turismoBuscado;
+			} while (opcion < 0 || opcion > 10);
 			switch (opcion) {
-			case 1: // Añade un cliente
+			case 1:// añade c
 				Cliente nuevoCliente = null;
-				
+				do {
+					System.out.println("\nAÃ±adir cliente");
+					System.out.println("--------------");
+					System.out.print("Nombre: ");
+					String nombre = Entrada.cadena();
+					System.out.print("DNI: ");
+					String dni = Entrada.cadena();
+					System.out.print("DirecciÃ³n: ");
+					String direccion = Entrada.cadena();
+					System.out.print("Localidad: ");
+					String localidad = Entrada.cadena();
+					System.out.print("CÃ³digo postal: ");
+					String codigoPostal = Entrada.cadena();
+					try {
+						nuevoCliente = new Cliente(nombre, dni, direccion, localidad, codigoPostal);
+					} catch (ExcepcionAlquilerVehiculos e) {
+						System.out.printf("ERROR: %s%n%n", e.getMessage());
+						System.out.println("Vuelve a introducir los datos de forma correcta");
+					}
+				} while (nuevoCliente == null);
+				try {
+					miAlquiler.anadeCliente(nuevoCliente);
+					;
+				} catch (ExcepcionAlquilerVehiculos e) {
+					System.out.printf("ERROR: %s%n%n", e.getMessage());
+				}
 				break;
-			case 2: // borrar Cliente
-				
-				break;
-			case 3:// Listar Clientes usamos el metodo getCliente(dni)
-				
-				
+			case 2:// borrar c
+				System.out.println("\nBorrar cliente");
+				System.out.println("--------------");
+				System.out.print("\nIntroduce el DNI del cliente a borrar: ");
+				String dniBorrar = Entrada.cadena();
+				try {
+					miAlquiler.borrarCliente(dniBorrar);
+					System.out.println("Cliente borrado satisfactoriamente\n");
+				} catch (Exception e) {
+					System.out.printf("ERROR: %s%n%n", e.getMessage());
+				}
 				break;
 
-			case 4: // Añadir Turismo
-				
-				
+			case 3:// lista c
+				System.out.println("\nListado de clientes");
+				System.out.println("-------------------");
+				for (Cliente cliente : miAlquiler.getClientes()) {
+					if (cliente != null)
+						System.out.println(cliente);
+				}
+				System.out.println("");
 				break;
-			case 5:// borrar Turismo
-				
+			case 4: // anadir t (Turismo turismo )
+				Turismo nuevoTurismo = null;
+				System.out.println("\nAñade turismo");
+				System.out.println("---------------");
+				System.out.print("Matricula: ");
+				String matriculaNueva = Entrada.cadena();
+				System.out.print("Marca: ");
+				String marcaNueva = Entrada.cadena();
+				System.out.print("Modelo: ");
+				String modeloNuevo = Entrada.cadena();
+				System.out.print("Cilindrada: ");
+				int cilindradaNueva = Entrada.entero();
+				try {
+					nuevoTurismo = new Turismo(matriculaNueva, marcaNueva, modeloNuevo, cilindradaNueva);
+					miAlquiler.anadeTurismo(nuevoTurismo);
+				} catch (ExcepcionAlquilerVehiculos e) {
+					System.out.printf("ERROR: %s%n%n", e.getMessage());
+				}
 				break;
-			case 6:// Listar Turismo
-				
-				
-		
+			case 5:// borrar t ( String matricula )
+				System.out.println("\nBorrar Turismo");
+				System.out.println("---------------");
+				System.out.print("\nIntroduce la matricula del vehiculo a borrar: ");
+				String matriculaBorrar = Entrada.cadena();
+				try {
+					miAlquiler.borrarTurismo(matriculaBorrar);
+					System.out.println("Turismo borrado satisfactoriamente\n");
+				} catch (ExcepcionAlquilerVehiculos e) {
+					System.out.printf("ERROR: %s%n%n", e.getMessage());
+				}
 				break;
-			case 7: // abrir alquiler
 
-				throw new ExcepcionAlquilerVehiculos("Este metodo por ahora no tiene funcionalidad, en breve estara operativo");
+			case 6:// listar t
+				System.out.println("\nListado de vehÃ­culos");
+				System.out.println("--------------------");
+				for (Turismo turismo : miAlquiler.getTurismo()) {
+					if (turismo != null)
+						System.out.println(turismo);
+				}
+				System.out.println("");
+				break;
+			case 7:// abrir alquiler
+				System.out.println("\nAbrir alquiler");
+				System.out.println("-------------");
+				System.out.print("\nIntroduce la matricula : ");
+				// pasamos una matricula y un dni
 
-			case 8: // cerrar el alquiler
+				String matriculaAlquiler = Entrada.cadena();
+				Turismo turismoAlquilado = miAlquiler.getTurismo(matriculaAlquiler); // llamada al metodo pasamo un
+																						// vehiculo
+
+				String dniAlquiler = Entrada.cadena();
+				Cliente clienteAlquila = miAlquiler.getCliente(dniAlquiler); // llamada a metodo pasamos dni un Cliente
+
+				// comprueba si alquier existe
+				if (turismoAlquilado == null)
+					System.out.println("ERROR: No existe un vehiculo con dicha matricula\n");
+				else {
+					try {
+						miAlquiler.abrirAlquiler(clienteAlquila, turismoAlquilado); // se llama al metodo
+																					// alquilerVehiculos pasamos cliente
+																					// y un turismo
+						System.out.println("Alquiler abierto satisfactoriamente\n");
+					} catch (ExcepcionAlquilerVehiculos e) {
+						System.out.printf("ERROR: %s%n%n", e.getMessage());
+					}
+				}
+				break;
+			case 8:// cerrar alquiler ( turismoAlquilado, clienteAlquila)
+				System.out.println("\nCerrar alquiler");
+				System.out.println("-------------");
 				
+				System.out.print("\nIntroduce la matricula : ");
+				// pasamos una matricula y un dni
+
+				String matriculaCerrar = Entrada.cadena();
+				Turismo turismoCerrar = miAlquiler.getTurismo(matriculaCerrar); // llamada al metodo pasamo un
 				
-				throw new ExcepcionAlquilerVehiculos("Este metodo por ahora no tiene funcionalidad, en breve estara operativo");
+				// pasamos un dni 
 				
+				String dniCerrar = Entrada.cadena();
+				Cliente clienteCerrar = miAlquiler.getCliente(dniCerrar); // llamada a metodo pasamos dni un Client
+
+			   //  objetos clienteCerrar - turismoCerrar
+			
+				 turismoCerrar= miAlquiler.getTurismo(matriculaCerrar); 
+				clienteCerrar = miAlquiler.getCliente(dniCerrar); // llamada a metodo pasamos dni un Cliente
+
+				// comprueba si alquier existe
+				if (turismoCerrar == null)
+					System.out.println("ERROR: No existe un vehiculo con dicha matricula\n");
+				else {
+					try {
+						miAlquiler.cerrarAlquiler(clienteCerrar, turismoCerrar); // se llama al metodo pasamos dos objetos 
+																					
+						System.out.println("Alquiler se cerro satisfactoriamente\n");
+					} catch (ExcepcionAlquilerVehiculos e) {
+						System.out.printf("ERROR: %s%n%n", e.getMessage());
+					}
+				}
+				break;
+
 			case 9:// listar alquiler
-				
+
+				System.out.println("\nListado de Alquiler");
+				System.out.println("---------------------");
+				for (Alquiler alquiler : miAlquiler.getAlquileres()) {
+					if (alquiler != null)
+						System.out.println(alquiler);
+				}
+				System.out.println("");
 				break;
 			default:
 				break;
-				}
-				
-			
+			}
 		} while (opcion != 0);
 	}
 
