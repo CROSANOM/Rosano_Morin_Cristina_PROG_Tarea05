@@ -1,5 +1,6 @@
 package tarea05;
 
+import java.util.Arrays;
 
 /**
  * @author crosanom
@@ -15,9 +16,9 @@ public class AlquilerVehiculos {
 	private Cliente[] clientes; // Array de tipo Cliente
 	private Alquiler[] alquileres; // Array de tipo Alquiler
 
-	private final int MAX_TURISMO = 120; // indicar el tamaño del array se quiere tener 50 turismo de reserva
-	private final int MAX_CLIENTES = 100;
-	private final int MAX_ALQUILERES = 100;
+	private final int MAX_TURISMO = 5; // indicar el tamaño del array se quiere tener 50 turismo de reserva
+	private final int MAX_CLIENTES = 5;
+	private final int MAX_ALQUILERES = 5;
 
 	// Punto20 constructor inicializa los atributos crea los array
 
@@ -71,10 +72,23 @@ public class AlquilerVehiculos {
 		return alquileres;
 	}
 
+	// creo toString AlquierVehiculo para controlar la clase en el main 
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "AlquilerVehiculos [turismos=" + Arrays.toString(turismos) + ", clientes=" + Arrays.toString(clientes)
+				+ ", alquileres=" + Arrays.toString(alquileres) + ", MAX_TURISMO=" + MAX_TURISMO + ", MAX_CLIENTES="
+				+ MAX_CLIENTES + ", MAX_ALQUILERES=" + MAX_ALQUILERES + "]";
+	}
 	/*
 	 * Punto22 Crear el metodo getCliente (String DNI ) similar al metodo Cliente
-	 * buscar de la tarea de Taller Mecanico
+	 * buscar de la tarea de Taller Mecanico // recupera Cliente por su dni 
 	 */
+
 
 	public Cliente getCliente(String dni) {
 		int posicion = 0;
@@ -290,30 +304,30 @@ public class AlquilerVehiculos {
 		int posicion = 0;
 		boolean posicionEncontrada = false;
 
-		// Si el vehiculo est� disponible se busca hueco en array.
+		// Si el vehiculo esta disponible se busca hueco en array.
 		if (turismo.isDisponibilidad()) {
 			// Buscamos un hueco en el array.
 			while (posicion < alquileres.length && !posicionEncontrada) {
-				// Si la posicion est� vacia se puede asignar el alquiler.
+				// Si la posicion esta vacia se puede asignar el alquiler.
 				if (alquileres[posicion] == null) {
 					alquileres[posicion] = new Alquiler(cliente, turismo);
 					posicionEncontrada = true;
 					turismos[posicion].setDisponibilidad(false);
-					System.out.println("Alquiler creado con �xito.");
+					System.out.println("Alquiler creado con exito.");
 				}
 			}
 			// Si no ha encontrado un hueco vacio.
 			if (posicionEncontrada == false)
-				System.out.println("Alquileres al m�ximo.");
+				System.out.println("Alquileres al maximo.");
 
 		} else {
-			throw new ExcepcionAlquilerVehiculos("El vehiculo no est� disponible.");
+			throw new ExcepcionAlquilerVehiculos("El vehiculo no esta disponible.");
 		}
 
 	}
 
 	/*
-	 * Punto29 Crea un m�todo closeAlquiler que cierre el alquiler dado un cliente y
+	 * Punto29 Crea un metodo closeAlquiler que cierre el alquiler dado un cliente y
 	 * un turismo
 	 */
 
@@ -326,18 +340,18 @@ public class AlquilerVehiculos {
 		int posicion = 0;
 		boolean posicionEncontrada = false;
 
-		// Buscar en el array por los par�metros.
+		// Buscar en el array por los parmetros.
 		while (posicion < alquileres.length && !posicionEncontrada) {
 
 			// Comprobar si el alquiler esta abierto.
 			if (alquileres[posicion].getDias() == 0) {
-				// Comparar uno de los par�metros del alquiler.
+				// Comparar uno de los parametros del alquiler.
 				if (alquileres[posicion].getCliente().getDni() == cliente.getDni()
 						&& alquileres[posicion].getTurismo().getMatricula() == turismo.getMatricula()) {
 					posicionEncontrada = true;
 					// Cerrar alquiler.
 					alquileres[posicion].cerrarAlquiler();
-					System.out.println("Alquiler cerrado con �xito.");
+					System.out.println("Alquiler cerrado con exito.");
 
 				} else {
 					// Si no es el alquiler, se pasa posicion.
