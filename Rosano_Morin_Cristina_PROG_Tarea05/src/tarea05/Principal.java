@@ -27,7 +27,13 @@ public class Principal {
 		// cilindrada)
 		Turismo turismo1 = new Turismo("1111BBB", "Seat", "Ibiza", 1900);
 		Turismo turismo2 = new Turismo("2222BBB", "Opel", "Corsa", 1600);
+		
+		// ponemos disponible el turismo ( forzamos la disponibilidad con un set) 
+		
+		turismo1.setDisponibilidad(true);
+		turismo2.setDisponibilidad(true);
 		// añadimos turismo
+		
 		miAlquiler.anadeTurismo(turismo1);
 		miAlquiler.anadeTurismo(turismo2);
 
@@ -136,6 +142,7 @@ public class Principal {
 				String modeloNuevo = Entrada.cadena();
 				System.out.print("Cilindrada: ");
 				int cilindradaNueva = Entrada.entero();
+				nuevoTurismo.setDisponibilidad(true);
 				try {
 					nuevoTurismo = new Turismo(matriculaNueva, marcaNueva, modeloNuevo, cilindradaNueva);
 					miAlquiler.anadeTurismo(nuevoTurismo);

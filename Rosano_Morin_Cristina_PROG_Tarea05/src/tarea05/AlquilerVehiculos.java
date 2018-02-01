@@ -1,5 +1,6 @@
 package tarea05;
 
+
 /**
  * @author crosanom
  *
@@ -14,7 +15,7 @@ public class AlquilerVehiculos {
 	private Cliente[] clientes; // Array de tipo Cliente
 	private Alquiler[] alquileres; // Array de tipo Alquiler
 
-	private final int MAX_TURISMO = 120; // indicar el tamaño del array se quiere tener 50 turismo de reserva
+	private final int MAX_TURISMO = 120; // indicar el tamaÃ±o del array se quiere tener 50 turismo de reserva
 	private final int MAX_CLIENTES = 100;
 	private final int MAX_ALQUILERES = 100;
 
@@ -92,9 +93,9 @@ public class AlquilerVehiculos {
 	}
 
 	/*
-	 * Punto23 Crear metodo añadirCliente que se le pasa por parametro un cliente
-	 * que añada un cliente al array de clientes si cabe y si no existe ningún otro
-	 * con el mismo DNI o lance una excepción en caso contrario.
+	 * Punto23 Crear metodo aÃ±adirCliente que se le pasa por parametro un cliente
+	 * que aÃ±ada un cliente al array de clientes si cabe y si no existe ningÃºn otro
+	 * con el mismo DNI o lance una excepciÃ³n en caso contrario.
 	 */
 
 	/**
@@ -107,30 +108,30 @@ public class AlquilerVehiculos {
 
 		while (posicion < clientes.length && !posicionEncontrada) { // mientras posicion sea menor que el array y que
 			// distinta a la encontrada
-			if (clientes[posicion] == null) // si posición esta vacia
+			if (clientes[posicion] == null) // si posiciÃ³n esta vacia
 				posicionEncontrada = true; // posicion pasa de false a encontrada
 
 			/*
-			 * si la posición en la que estoy tiene un dni y es igual al dni de mi cliente
-			 * que quiero añadir
+			 * si la posiciÃ³n en la que estoy tiene un dni y es igual al dni de mi cliente
+			 * que quiero aÃ±adir
 			 */
 			else if (clientes[posicion].getDni().equals(cliente.getDni()))
 
-				throw new ExcepcionAlquilerVehiculos("Ya existe un cliente con ese DNI"); // salta excepción con msm
+				throw new ExcepcionAlquilerVehiculos("Ya existe un cliente con ese DNI"); // salta excepciÃ³n con msm
 			// cliente exite
 			else
-				posicion++; // sino paso a la posición siguiente
+				posicion++; // sino paso a la posiciÃ³n siguiente
 		}
 
-		// Si habia hueco y no está repetido, se añade el cliente.
+		// Si habia hueco y no estÃ¡ repetido, se aÃ±ade el cliente.
 		if (posicionEncontrada)
 			clientes[posicion] = cliente;
 		else
-			throw new ExcepcionAlquilerVehiculos("El array de clientes está lleno."); // sino lanzo una excepcion
+			throw new ExcepcionAlquilerVehiculos("El array de clientes estÃ¡ lleno."); // sino lanzo una excepcion
 	}
 
 	/*
-	 * Punto24 Crea un método delCliente que borre un cliente, dado su DNI (
+	 * Punto24 Crea un mÃ©todo delCliente que borre un cliente, dado su DNI (
 	 * parametro) del array de clientes si este existe
 	 */
 
@@ -154,7 +155,7 @@ public class AlquilerVehiculos {
 					// Borro cliente y salgo del while.
 					clientes[posicion] = null;
 					posicionEncontrada = true;
-					System.out.println("Eliminado el cliente con éxito");
+					System.out.println("Eliminado el cliente con Ã©xito");
 
 				} else
 					posicion++;
@@ -168,7 +169,7 @@ public class AlquilerVehiculos {
 	}
 
 	/*
-	 * Punto25 Crea un método getTurismo que se le pase la matrícula de un turismo y
+	 * Punto25 Crea un mÃ©todo getTurismo que se le pase la matrÃ­cula de un turismo y
 	 * nos lo devuelva si este existe o null en caso contrario.
 	 */
 
@@ -193,8 +194,8 @@ public class AlquilerVehiculos {
 	}
 
 	/*
-	 * Punto 26 Crea un método addTurismo que añada un turismo al array de turismos
-	 * si cabe y no existe ningún otro con la misma matrícula o lance una excepción
+	 * Punto 26 Crea un mÃ©todo addTurismo que aÃ±ada un turismo al array de turismos
+	 * si cabe y no existe ningÃºn otro con la misma matrÃ­cula o lance una excepciÃ³n
 	 * en caso contrario.
 	 */
 
@@ -208,31 +209,31 @@ public class AlquilerVehiculos {
 
 		while (posicion < turismos.length && !posicionEncontrada) { // mientras posicion sea menor que el array y que
 			// distinta a la encontrada
-			if (turismos[posicion] == null) // si posición esta vacia
+			if (turismos[posicion] == null) // si posiciÃ³n esta vacia
 				posicionEncontrada = true; // posicion pasa de false a encontrada
 
 			/*
-			 * si la posición en la que estoy tiene un turismo y es igual al matricula de mi
-			 * turismo que quiero añadir
+			 * si la posiciÃ³n en la que estoy tiene un turismo y es igual al matricula de mi
+			 * turismo que quiero aÃ±adir
 			 */
 			else if (turismos[posicion].getMatricula().equals(turismo.getMatricula()))
 
-				throw new ExcepcionAlquilerVehiculos("Ya existe un tursimo con esta matricula"); // salta excepción con
+				throw new ExcepcionAlquilerVehiculos("Ya existe un tursimo con esta matricula"); // salta excepciÃ³n con
 																									// msm
 			// cliente exite
 			else
-				posicion++; // sino paso a la posición siguiente
+				posicion++; // sino paso a la posiciÃ³n siguiente
 		}
 
-		// Si habia hueco y no está repetido, se añade el turismo.
+		// Si habia hueco y no estÃ¡ repetido, se aÃ±ade el turismo.
 		if (posicionEncontrada)
 			turismos[posicion] = turismo;
 		else
-			throw new ExcepcionAlquilerVehiculos("El array de turismo está lleno."); // sino lanzo una excepcion
+			throw new ExcepcionAlquilerVehiculos("El array de turismo estÃ¡ lleno."); // sino lanzo una excepcion
 	}
 
 	/*
-	 * Punto 27 Crea un método delTurismo que borre un turismo, dada su matrícula,
+	 * Punto 27 Crea un mÃ©todo delTurismo que borre un turismo, dada su matrÃ­cula,
 	 * del array de turismos si este existe
 	 */
 
@@ -257,10 +258,10 @@ public class AlquilerVehiculos {
 						// Borro cliente y salgo del while.
 						turismos[posicion] = null;
 						posicionEncontrada = true;
-						System.out.println("Eliminado el turismo con éxito");
+						System.out.println("Eliminado el turismo con Ã©xito");
 					} else {
 						throw new ExcepcionAlquilerVehiculos(
-								"Este turismo está actualmente en uso, no se puede eliminar.");
+								"Este turismo estÃ¡ actualmente en uso, no se puede eliminar.");
 					}
 
 				} else
@@ -275,9 +276,9 @@ public class AlquilerVehiculos {
 	}
 
 	/*
-	 * Punto 28 Crea un método openAlquiler que dado un cliente y un turismo cree un
-	 * nuevo alquiler y lo añada al array de alquileres. Para ello se debe comprobar
-	 * que el turismo esté disponible. Haz un commit.
+	 * Punto 28 Crea un mÃ©todo openAlquiler que dado un cliente y un turismo cree un
+	 * nuevo alquiler y lo aÃ±ada al array de alquileres. Para ello se debe comprobar
+	 * que el turismo estÃ© disponible. Haz un commit.
 	 */
 
 	/**
@@ -289,30 +290,30 @@ public class AlquilerVehiculos {
 		int posicion = 0;
 		boolean posicionEncontrada = false;
 
-		// Si el vehiculo está disponible se busca hueco en array.
+		// Si el vehiculo estï¿½ disponible se busca hueco en array.
 		if (turismo.isDisponibilidad()) {
 			// Buscamos un hueco en el array.
 			while (posicion < alquileres.length && !posicionEncontrada) {
-				// Si la posicion está vacia se puede asignar el alquiler.
+				// Si la posicion estï¿½ vacia se puede asignar el alquiler.
 				if (alquileres[posicion] == null) {
 					alquileres[posicion] = new Alquiler(cliente, turismo);
 					posicionEncontrada = true;
 					turismos[posicion].setDisponibilidad(false);
-					System.out.println("Alquiler creado con éxito.");
+					System.out.println("Alquiler creado con ï¿½xito.");
 				}
 			}
 			// Si no ha encontrado un hueco vacio.
 			if (posicionEncontrada == false)
-				System.out.println("Alquileres al máximo.");
+				System.out.println("Alquileres al mï¿½ximo.");
 
 		} else {
-			throw new ExcepcionAlquilerVehiculos("El vehiculo no está disponible.");
+			throw new ExcepcionAlquilerVehiculos("El vehiculo no estï¿½ disponible.");
 		}
 
 	}
 
 	/*
-	 * Punto29 Crea un método closeAlquiler que cierre el alquiler dado un cliente y
+	 * Punto29 Crea un mï¿½todo closeAlquiler que cierre el alquiler dado un cliente y
 	 * un turismo
 	 */
 
@@ -325,18 +326,18 @@ public class AlquilerVehiculos {
 		int posicion = 0;
 		boolean posicionEncontrada = false;
 
-		// Buscar en el array por los parámetros.
+		// Buscar en el array por los parï¿½metros.
 		while (posicion < alquileres.length && !posicionEncontrada) {
 
 			// Comprobar si el alquiler esta abierto.
 			if (alquileres[posicion].getDias() == 0) {
-				// Comparar uno de los parámetros del alquiler.
+				// Comparar uno de los parï¿½metros del alquiler.
 				if (alquileres[posicion].getCliente().getDni() == cliente.getDni()
 						&& alquileres[posicion].getTurismo().getMatricula() == turismo.getMatricula()) {
 					posicionEncontrada = true;
 					// Cerrar alquiler.
 					alquileres[posicion].cerrarAlquiler();
-					System.out.println("Alquiler cerrado con éxito.");
+					System.out.println("Alquiler cerrado con ï¿½xito.");
 
 				} else {
 					// Si no es el alquiler, se pasa posicion.
