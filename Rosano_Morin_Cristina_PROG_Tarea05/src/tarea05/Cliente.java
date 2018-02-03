@@ -20,8 +20,7 @@ public class Cliente {
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.localidad = localidad;
-		
- // comprueba que Dni 
+		/*Comprobaciones de dni y de codigo postal */
 		
 		dniCorrecto = compruebaDni(dni);
 		codigoCorrecto = compruebaCodigoPostal(codigoPostal);

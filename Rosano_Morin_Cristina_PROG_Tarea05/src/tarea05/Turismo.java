@@ -11,10 +11,11 @@ public class Turismo {
 
 	private String matricula, marca, modelo;
 	private int cilindrada;
-	private boolean disponibilidad;
+	private boolean disponibilidad = true;
 
-	// punto 10 crear un constructor clase Turismo con 4 parametros ( matricula,
-	// marca, modelo, cilindrada)
+	// punto 10 Constructor con Parametros inicializa si Matricula correcta y
+	// Cilindrada Mayor Cero
+
 	/**
 	 * @param matricula
 	 * @param marca
@@ -23,34 +24,70 @@ public class Turismo {
 	 */
 	public Turismo(String matricula, String marca, String modelo, int cilindrada) {
 
-		this.matricula = matricula;
-		this.marca = marca;
-		this.modelo = modelo;
-		this.cilindrada = cilindrada;
+		this.matricula=matricula;
+		this.marca=marca;
+		this.modelo=modelo;
+		this.cilindrada=cilindrada;
+	
+
+		 // constructor
+
+			// Comprobar la cilindrada
+
+			if (cilindrada > 0) {
+				this.cilindrada = cilindrada;
+			} else
+
+				throw new ExcepcionAlquilerVehiculos("La cilindrada no es correcta");
+
+			// Comprobar Matricula
+
+			boolean matriculaCorrecta = false;
+			matriculaCorrecta = compruebaMatricula(matricula);
+
+			if (matriculaCorrecta) {
+				this.matricula = matricula; // inicializar matricula
+			} else
+				throw new ExcepcionAlquilerVehiculos("La matricula No es correcta"); // lanzar excepción
+		
+
+	}// cierraConstructor
+
+	// Constructor Copia
+
+	public Turismo(Turismo turismo) {
+
+		matricula = turismo.getMatricula();
+		marca = turismo.getMarca();
+		modelo = turismo.getModelo();
+		cilindrada = turismo.getCilindrada();
+		disponibilidad = turismo.isDisponibilidad();
 
 	}
 
+	// Metodo para comprobar matricula usando expresión regular
 
+	boolean matriculaCorrecta = false;
 
-	/* metodo privado comprueba matricula es estatico no requiere de un objeto*/
+	/* metodo privado comprueba matricula es estatico no requiere de un objeto */
 	private static boolean compruebaMatricula(String matricula) {
-		
-		boolean matriculaCorrecta = false;
-		
-		Pattern matriculaPatron = Pattern.compile(" \"^([0-9]{4})([A-Z&&[^AEIOIU]]{3}$)\"");
+
+		boolean matriculaValidada = false;
+
+		Pattern matriculaPatron = Pattern.compile("[0-9]{4}[B-DF-HJ-NP-TV-Z]{3}");
 		Matcher emparejador = matriculaPatron.matcher((matricula));
-		
-		matriculaCorrecta = emparejador.matches();
-		
-		if (matriculaCorrecta) {
+
+		matriculaValidada = emparejador.matches();
+
+		if (matriculaValidada) {
 			System.out.println("La matricula  es Correcto");
 
 		} else {
 			System.out.println("La matricula es incorrecta ");
 
 		}
-		
-		return matriculaCorrecta;
+
+		return matriculaValidada;
 
 		// punto 11 metodos getter de los atributos
 	}
@@ -105,7 +142,8 @@ public class Turismo {
 	}
 
 	/**
-	 * @param disponibilidad the disponibilidad to set
+	 * @param disponibilidad
+	 *            the disponibilidad to set
 	 */
 	public void setDisponibilidad(boolean disponibilidad) {
 		this.disponibilidad = disponibilidad;

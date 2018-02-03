@@ -7,8 +7,7 @@ package tarea05;
  * @author crosanom
  *
  */
-
-// crear una clase que hereda de la clase Excepción
+//Punto4 crear una clase que hereda de la clase Excepción
 public class ExcepcionAlquilerVehiculos extends RuntimeException {
 
 	// crean los atributos

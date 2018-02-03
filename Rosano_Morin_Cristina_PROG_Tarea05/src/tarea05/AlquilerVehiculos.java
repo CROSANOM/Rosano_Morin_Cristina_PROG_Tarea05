@@ -72,10 +72,11 @@ public class AlquilerVehiculos {
 		return alquileres;
 	}
 
-	// creo toString AlquierVehiculo para controlar la clase en el main 
+	// creo toString AlquierVehiculo para controlar la clase en el main
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -86,9 +87,8 @@ public class AlquilerVehiculos {
 	}
 	/*
 	 * Punto22 Crear el metodo getCliente (String DNI ) similar al metodo Cliente
-	 * buscar de la tarea de Taller Mecanico // recupera Cliente por su dni 
+	 * buscar de la tarea de Taller Mecanico // recupera Cliente por su dni
 	 */
-
 
 	public Cliente getCliente(String dni) {
 		int posicion = 0;
@@ -340,33 +340,34 @@ public class AlquilerVehiculos {
 		int posicion = 0;
 		boolean posicionEncontrada = false;
 
-		// Buscar en el array por los parmetros.
-		while (posicion < alquileres.length && !posicionEncontrada) {
+		// Buscar en el array posicion 
+		while (posicion < alquileres.length && !posicionEncontrada) {// abre while
+			// comprobar si existe alquiler ( posicion array alquiler ! null )
+			if (alquileres[posicion] != null &&
+			// Comparar si alquiler existe ( dni buscado + matricula buscado estan )
+					(alquileres[posicion].getCliente().getDni().equals(cliente.getDni()) // dni cliente del alquiler =
+																						// dniClienteBuscar
+							&& alquileres[posicion].getTurismo().getMatricula().equals (turismo.getMatricula()))) { // matricula
+																			
+				posicionEncontrada = true; // encontradoAlquiler
 
-			// Comprobar si el alquiler esta abierto.
-			if (alquileres[posicion].getDias() == 0) {
-				// Comparar uno de los parametros del alquiler.
-				if (alquileres[posicion].getCliente().getDni() == cliente.getDni()
-						&& alquileres[posicion].getTurismo().getMatricula() == turismo.getMatricula()) {
-					posicionEncontrada = true;
-					// Cerrar alquiler.
-					alquileres[posicion].cerrarAlquiler();
-					System.out.println("Alquiler cerrado con exito.");
+			}else // Si no es el alquiler, se pasa posicion.
 
-				} else {
-					// Si no es el alquiler, se pasa posicion.
-					posicion++;
-				}
-
-			} else {
 				posicion++;
-			}
-		}
 
-		if (!posicionEncontrada) {
-			System.out.println("No existe ese alquiler con esos datos.");
-		}
+		}// cierre while 
 
-	}
+		if (posicionEncontrada) {
 
-}// finClase
+			alquileres[posicion].cerrarAlquiler();
+			
+			System.out.println("Ole, has cerrado el alquiler P.M");
+			
+		}else 
+	
+				throw new ExcepcionAlquilerVehiculos("No se ha encontrado ningun alquiler abierto");
+
+	  }
+}
+
+// finClase

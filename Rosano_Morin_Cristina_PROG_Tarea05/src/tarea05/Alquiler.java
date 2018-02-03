@@ -1,10 +1,6 @@
 package tarea05;
-
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.concurrent.TimeUnit;
+import java.util.Date;// instanciar la clase Fecha y acceder a sus metodos
 
 /**
  * @author crosanom
@@ -14,64 +10,62 @@ import java.util.concurrent.TimeUnit;
 // punto13 crear la clase Alquiler con sus atributos.
 
 public class Alquiler {
-
-	private Date fecha;
-	private int dias, MS_DIA;
-	private final SimpleDateFormat FORMATO_FECHA = new SimpleDateFormat("dd/MM/yyyy");// incialiazación del objeto
-	private final double PRECIO_DIA = 0;
+	// atributos de la clase Alquiler
 	private Cliente cliente;
 	private Turismo turismo;
+	private Date fecha;
+	private int dias;
 
-	// Usar los metodos de Date para Obtener fecha de sistema y segmentarlo año,
-	// mes, dia
-	// Calendar
+	private final int MILI_SEG_DIAS = 1000 * 60 * 60 * 24;// se declará los MiliSegundoDias
+	private final SimpleDateFormat FORMATO_FECHA = new SimpleDateFormat("dd/MM/yyyy");// incialiazación del objeto
+	private final double PRECIO_DIA = 30;// se incializa segun infor dada
 
-	Calendar calendario = new GregorianCalendar(); // creamos un objeto calendarioGregoriano
-
-	// punto14 crear un constructor clase Alquiler con Cliente Turismo como
-	// parametros
+	int guardaDiferenciaDias = 0;
+	
+	/*
+	 * punto14 crear un constructor clase Alquiler con Cliente Turismo como
+	 * parametros y que al crear un nuevo alquiler ponga la fecha actual del
+	 * sistema, los dias a cero y vehiculo no disponible.
+	 */
 
 	public Alquiler(Cliente cliente, Turismo turismo) {
 		this.cliente = cliente;
 		this.turismo = turismo;
-		this.fecha = new Date();// Inicializa la fecha a la fecha actual
-		this.dias = 0; // inicializa los dias a cero
-		this.turismo.setDisponibilidad(false); // inicializa la disponibilidad a false
+		this.fecha = new Date();
+		this.dias = 0;
+		this.turismo.setDisponibilidad(false);
 
 	}
 
-	// punto15 crear los métodos get para los atributos de la clase Alquiler
-	/**
-	 * @return the fecha
+	/*
+	 * punto15 crear los métodos get para los atributos de la clase Alquiler
+	 * Get(cliente, turismo,fecha, dias, MILISEG_DIA,FORMATO_FECHA PRECIO_DIA
 	 */
-	public Date getFecha() { // obtenemos la fecha del sistema porque fecha guarda esa información
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public Turismo getTurismo() {
+		return turismo;
+	}
+
+	public Date getFecha() {
 		return fecha;
 	}
 
-	/**
-	 * @return the dias
-	 */
 	public int getDias() {
 		return dias;
 	}
 
-	/**
-	 * @return the mS_DIA
-	 */
-	public int getMS_DIA() {
-		return MS_DIA;
+	public int getMILISEG_DIAS() {
+		return MILI_SEG_DIAS;
 	}
 
-	/**
-	 * @return the fORMATO_FECHA
-	 */
 	public SimpleDateFormat getFORMATO_FECHA() {
 		return FORMATO_FECHA;
 	}
 
-	/**
-	 * @return the pRECIO_DIA
-	 */
 	public double getPRECIO_DIA() {
 		return PRECIO_DIA;
 	}
@@ -88,27 +82,24 @@ public class Alquiler {
 	// metodo para DifDias url
 	// https://github.com/Masqueprogramar/JavaBasico/blob/master/src/com/masqueprogramar/util/UtilesFecha.java
 
-	int diferenciaDias = 0;
-
-	private int diferenciaDiasEntreDosFechas(Date fechaAlquiler, Date fechaDevolucion) {
-		long startTime = fechaAlquiler.getTime();
-		long endTime = fechaDevolucion.getTime();
-		long diffTime = endTime - startTime;
-		diferenciaDias = (int) TimeUnit.DAYS.convert(diffTime, TimeUnit.MILLISECONDS);
-		return (diferenciaDias); // se pasa el valor el metodo TimeUnit a diferenciaDias
+	private int diferenciaDias(Date fechaFin, Date fechaInicio) {
+		long milisegundos = fechaFin.getTime() - fechaInicio.getTime(); // ojo getTime devuelve los milisegundos
+		long dias = milisegundos / MILI_SEG_DIAS;
+		return (int) dias; // ( int) casting pasamos long a int
 	}
 
 	// metodo Close Cierra Alquiler
 
-	public void cerrar() {
-		Date ahora = new Date();
+	public void cerrarAlquiler() {
 
-		if (diferenciaDias == 0) { // condicion para ver numero de dias
+		Date fechaActual = new Date();
+		dias = diferenciaDias(fechaActual, fecha); // devuelve un numero de dias
+
+		if (dias == 0) { // si la di ferencia de restar la fecha de alquiler y la de entrada es cero
 			dias = +1;
-		}
-
-		else {
-			dias = 1 + diferenciaDias;
+		} else {
+			dias = dias + 1; // si se ha alquilidado durante mas de un dia la diferencia de dias sera
+								// difDias+1
 		}
 
 		this.turismo.setDisponibilidad(true); // pone turismo disponible
@@ -118,13 +109,9 @@ public class Alquiler {
 	// Punto 17 GetPrecio Metodo calcule el precio total ( 30 euros * Ndias +
 	// cilindra/100 )
 
-	public double getPrecio(double PRECIO_DIA, int dias, Turismo cilindrada) { // parametros del getPrecio
+	public double getPrecio() { // obtener el precioDia segun regla de negocio
 
-		// instanciar una cilindrada
-
-		double precioTotal = ((PRECIO_DIA * diferenciaDias) + turismo.getCilindrada() / 100);
-
-		return precioTotal;
+		return PRECIO_DIA * dias + turismo.getCilindrada() / 100;
 	}
 
 	// Punto18 Crear un método llamado toString y que devuelva un String que será la
@@ -137,8 +124,9 @@ public class Alquiler {
 	 */
 	@Override
 	public String toString() {
-		return "Alquiler [fecha=" + fecha + ", dias=" + dias + ", MS_DIA=" + MS_DIA + ", FORMATO_FECHA=" + FORMATO_FECHA
-				+ ", PRECIO_DIA=" + PRECIO_DIA + ", cliente=" + cliente + ", turismo=" + turismo + "]";
+		return "Alquiler [cliente=" + cliente + ", turismo=" + turismo + ", fecha=" + fecha + ", dias=" + dias
+				+ ", MILI_SEG_DIAS=" + MILI_SEG_DIAS + ", FORMATO_FECHA=" + FORMATO_FECHA + ", PRECIO_DIA=" + PRECIO_DIA
+				+ ", guardaDiferenciaDias=" + guardaDiferenciaDias + "]";
 	}
 
 }
